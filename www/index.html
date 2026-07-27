@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Tirely</title>
+<meta name="theme-color" content="#4DBEDB">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="apple-touch-icon" href="./icons/icon-180.png">
+<style>
+  html,body{margin:0;height:100%;background:#F0F8FA;}
+</style>
+<script>
+// Routage de demarrage. Protege par try/catch : dans certains WebView Android
+// en file://, l'acces a localStorage peut lever une exception. On ne bloque jamais
+// le demarrage pour autant — on part sur l'app principale.
+(function () {
+  var target = "./Tirely.dc.html";
+  try {
+    if (localStorage.getItem("tirely_first_launch") === null) {
+      localStorage.setItem("tirely_first_launch", "false");
+      target = "./Onboarding.dc.html";
+    }
+  } catch (e) { /* stockage indisponible : on va directement a l'app */ }
+  location.replace(target);
+})();
+</script>
+</head>
+<body></body>
+</html>

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./offline.js"></script>
+<script src="./vendor/react.production.min.js"></script>
+<script src="./vendor/react-dom.production.min.js"></script>
+<link rel="stylesheet" href="./open-sans.css">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="manifest" href="./manifest.webmanifest">
+<meta name="theme-color" content="#4DBEDB">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Tirely">
+<link rel="apple-touch-icon" href="./icons/icon-180.png">
+<script>
+  try{
+    if(localStorage.getItem('tirely_onboarded')==='1' && matchMedia('(display-mode: standalone)').matches){ location.replace('Tirely.dc.html'); }
+  }catch(e){}
+  document.addEventListener('click',function(e){
+    var a = e.target.closest && e.target.closest('a[href="./Tirely.dc.html"]');
+    if(a){ try{ localStorage.setItem('tirely_onboarded','1'); }catch(_){} }
+  });
+</script>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; }
+  a { color: #4DBEDB; text-decoration: none; }
+  a:hover { color: #2E6DA4; }
+  .ob-scroll::-webkit-scrollbar { display: none; }
+  .ob-scroll { scrollbar-width: none; }
+  .ob-in { width:100%; background:#EEF3FA; border:1px solid #D4E4F0; border-radius:12px; padding:13px 15px; font-size:15px; color:#1E3A5F; outline:none; font-family:'Open Sans',sans-serif; }
+  .ob-in::placeholder { color:rgba(107,122,141,0.7); }
+  .ob-in:focus { border-color:#4DBEDB; }
+  input[type=range]{ width:100%; accent-color:#4DBEDB; }
+  @media (min-width: 481px){
+    .tir-desk{ padding:24px; }
+    .tir-bezel{ height:min(940px,calc(100dvh - 48px)); border-radius:28px; box-shadow:0 24px 70px rgba(30,58,95,0.22); }
+    .tir-screen{ border-radius:28px; }
+  }
+</style>
+</helmet>
+
+<div class="tir-desk" style="min-height:100vh;min-height:100dvh;background:#E4EEF5;display:flex;align-items:center;justify-content:center;padding:0;font-family:'Open Sans',sans-serif;">
+  <div class="tir-bezel" style="position:relative;width:100%;max-width:480px;height:100dvh;height:100svh;background:#F0F8FA;overflow:hidden;">
+    <div class="tir-screen" style="position:relative;width:100%;height:100%;background:#F0F8FA;overflow:hidden;color:#1E3A5F;display:flex;flex-direction:column;">
+
+      <!-- HEADER: logo + progress -->
+      <div style="padding:14px 24px 16px;flex-shrink:0;display:flex;flex-direction:column;gap:22px;">
+        <div style="font-size:24px;font-weight:800;color:#4DBEDB;letter-spacing:-0.6px;line-height:1;">Tirely</div>
+        <div style="display:flex;gap:6px;">
+          <sc-for list="{{ prog }}" as="p" hint-placeholder-count="6">
+            <div style="{{ p.style }}"></div>
+          </sc-for>
+        </div>
+      </div>
+
+      <!-- BODY -->
+      <div class="ob-scroll" style="flex:1;overflow-y:auto;padding:4px 24px 12px;">
+
+        <!-- STEP 1 -->
+        <div style="display:{{ s1 }};flex-direction:column;">
+          <div style="font-size:11px;font-weight:700;color:#4DBEDB;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Étape 1 sur 6</div>
+          <div style="font-size:23px;font-weight:800;line-height:1.25;margin-bottom:6px;">Bienvenue sur Tirely 👋</div>
+          <div style="font-size:14px;color:#6B7A8D;line-height:1.5;margin-bottom:22px;">On te prépare une expérience budget sur mesure. Ça prend 2 minutes, promis.</div>
+          <label style="font-size:12px;font-weight:600;color:#6B7A8D;display:block;margin-bottom:7px;">Ton prénom</label>
+          <input id="ob_name" class="ob-in" type="text" placeholder="Ex : Gabriel" style="margin-bottom:16px;">
+          <label style="font-size:12px;font-weight:600;color:#6B7A8D;display:block;margin-bottom:7px;">Tu as quel âge ?</label>
+          <input class="ob-in" type="number" placeholder="Ex : 27" style="margin-bottom:16px;">
+          <label style="font-size:12px;font-weight:600;color:#6B7A8D;display:block;margin-bottom:10px;">Tu vis...</label>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <div onClick="{{ setSit0 }}" style="{{ sit0 }}"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8.5" r="3.3"></circle><path d="M5.5 19.5c0-3.4 2.9-5.7 6.5-5.7s6.5 2.3 6.5 5.7"></path></svg><span style="font-size:13.5px;font-weight:600;color:#1E3A5F;">Seul(e)</span></div>
+            <div onClick="{{ setSit1 }}" style="{{ sit1 }}"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.5" cy="8.5" r="2.7"></circle><circle cx="16" cy="9.5" r="2.2"></circle><path d="M3.5 19c0-2.8 2.2-4.6 5-4.6 1.2 0 2.3.3 3.1.9"></path><path d="M13.5 19c.3-2 1.7-3.3 3.8-3.3 1.7 0 2.9 1 3.2 2.5"></path></svg><span style="font-size:13.5px;font-weight:600;color:#1E3A5F;">En couple</span></div>
+            <div onClick="{{ setSit2 }}" style="{{ sit2 }}"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7.5" r="2.5"></circle><circle cx="5.5" cy="10" r="2.1"></circle><circle cx="18.5" cy="10" r="2.1"></circle><path d="M8 19c0-2.3 1.8-3.9 4-3.9s4 1.6 4 3.9"></path><path d="M2.5 18c0-1.8 1.2-3 3-3.1"></path><path d="M18.5 14.9c1.8.1 3 1.3 3 3.1"></path></svg><span style="font-size:13.5px;font-weight:600;color:#1E3A5F;">En colocation</span></div>
+            <div onClick="{{ setSit3 }}" style="{{ sit3 }}"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11 12 4l8 7"></path><path d="M6 10v9h12v-9"></path><path d="M10 19v-5h4v5"></path></svg><span style="font-size:13.5px;font-weight:600;color:#1E3A5F;">En famille</span></div>
+          </div>
+        </div>
+
+        <!-- STEP 2 -->
+        <div style="display:{{ s2 }};flex-direction:column;">
+          <div style="font-size:11px;font-weight:700;color:#4DBEDB;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Étape 2 sur 6</div>
+          <div style="font-size:23px;font-weight:800;line-height:1.25;margin-bottom:6px;">Ton profil financier</div>
+          <div style="font-size:14px;color:#6B7A8D;line-height:1.5;margin-bottom:22px;">Pas de connexion bancaire, tout est renseigné par toi. Ces infos restent sur ton téléphone.</div>
+          <label style="font-size:12px;font-weight:600;color:#6B7A8D;display:block;margin-bottom:10px;">Ta situation principale</label>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:22px;">
+            <div onClick="{{ setStat0 }}" style="{{ stat0 }}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="11" rx="2"></rect><path d="M8 8V6.5A2 2 0 0 1 10 4.5h4a2 2 0 0 1 2 2V8"></path><path d="M3 13h18"></path></svg><span style="font-size:13.5px;font-weight:600;color:#1E3A5F;">Salarié(e)</span><span style="font-size:11px;color:#6B7A8D;">CDI / CDD</span></div>
+            <div onClick="{{ setStat1 }}" style="{{ stat1 }}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 9 12 5l9.5 4-9.5 4z"></path><path d="M6 11v4c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5v-4"></path><path d="M21.5 9v4.5"></path></svg><span style="font-size:13.5px;font-weight:600;color:#1E3A5F;">Étudiant(e)</span><span style="font-size:11px;color:#6B7A8D;">Bourse / job</span></div>
+            <div onClick="{{ setStat2 }}" style="{{ stat2 }}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c2.8 1.6 4.3 4.5 4.3 7.8 0 2-.9 3.9-2.3 5.4h-4C8.6 14.7 7.7 12.8 7.7 10.8 7.7 7.5 9.2 4.6 12 3z"></path><circle cx="12" cy="9.5" r="1.6"></circle><path d="M9.7 16.6 8.2 20l3-1.6M14.3 16.6 15.8 20l-3-1.6"></path></svg><span style="font-size:13.5px;font-weight:600;color:#1E3A5F;">Alternant(e)</span><span style="font-size:11px;color:#6B7A8D;">Apprentissage</span></div>
+            <div onClick="{{ setStat3 }}" style="{{ stat3 }}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"></circle><circle cx="12" cy="12" r="4.4"></circle><circle cx="12" cy="12" r="1.2" fill="currentColor"></circle></svg><span style="font-size:13.5px;font-weight:600;color:#1E3A5F;">Indépendant</span><span style="font-size:11px;color:#6B7A8D;">Freelance</span></div>
+          </div>
+          <label style="font-size:12px;font-weight:600;color:#6B7A8D;display:block;margin-bottom:10px;">Revenus mensuels nets estimés (€)</label>
+          <div style="display:flex;justify-content:space-between;font-size:12px;color:#6B7A8D;margin-bottom:8px;"><span>0 €</span><span style="color:#4DBEDB;font-weight:700;">{{ revenuText }}</span><span>5 000 €</span></div>
+          <input type="range" min="0" max="5000" step="50" value="{{ revenu }}" onInput="{{ setRevenu }}">
+        </div>
+
+        <!-- STEP 3 -->
+        <div style="display:{{ s3 }};flex-direction:column;">
+          <div style="font-size:11px;font-weight:700;color:#4DBEDB;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Étape 3 sur 6</div>
+          <div style="font-size:23px;font-weight:800;line-height:1.25;margin-bottom:6px;">Tes charges fixes</div>
+          <div style="font-size:14px;color:#6B7A8D;line-height:1.5;margin-bottom:22px;">Renseigne tes charges mensuelles récurrentes pour qu'on calcule automatiquement ton « reste à vivre ».</div>
+          <div style="display:flex;gap:10px;margin-bottom:12px;">
+            <div style="flex:1;background:#fff;border:1px solid #D4E4F0;border-radius:12px;padding:11px 13px;box-shadow:0 4px 16px rgba(30,58,95,0.05);"><label style="font-size:11px;color:#6B7A8D;display:block;margin-bottom:5px;">Loyer / crédit</label><input id="c_loyer" class="ob-in" type="number" placeholder="750" style="border:none;background:transparent;padding:0;font-size:17px;font-weight:700;"></div>
+            <div style="flex:1;background:#fff;border:1px solid #D4E4F0;border-radius:12px;padding:11px 13px;box-shadow:0 4px 16px rgba(30,58,95,0.05);"><label style="font-size:11px;color:#6B7A8D;display:block;margin-bottom:5px;">Téléphone</label><input id="c_tel" class="ob-in" type="number" placeholder="20" style="border:none;background:transparent;padding:0;font-size:17px;font-weight:700;"></div>
+          </div>
+          <div style="display:flex;gap:10px;margin-bottom:12px;">
+            <div style="flex:1;background:#fff;border:1px solid #D4E4F0;border-radius:12px;padding:11px 13px;box-shadow:0 4px 16px rgba(30,58,95,0.05);"><label style="font-size:11px;color:#6B7A8D;display:block;margin-bottom:5px;">Internet</label><input id="c_net" class="ob-in" type="number" placeholder="35" style="border:none;background:transparent;padding:0;font-size:17px;font-weight:700;"></div>
+            <div style="flex:1;background:#fff;border:1px solid #D4E4F0;border-radius:12px;padding:11px 13px;box-shadow:0 4px 16px rgba(30,58,95,0.05);"><label style="font-size:11px;color:#6B7A8D;display:block;margin-bottom:5px;">Transport</label><input id="c_trans" class="ob-in" type="number" placeholder="86" style="border:none;background:transparent;padding:0;font-size:17px;font-weight:700;"></div>
+          </div>
+          <div style="display:flex;gap:10px;margin-bottom:16px;">
+            <div style="flex:1;background:#fff;border:1px solid #D4E4F0;border-radius:12px;padding:11px 13px;box-shadow:0 4px 16px rgba(30,58,95,0.05);"><label style="font-size:11px;color:#6B7A8D;display:block;margin-bottom:5px;">Abonnements</label><input id="c_abo" class="ob-in" type="number" placeholder="30" style="border:none;background:transparent;padding:0;font-size:17px;font-weight:700;"></div>
+            <div style="flex:1;background:#fff;border:1px solid #D4E4F0;border-radius:12px;padding:11px 13px;box-shadow:0 4px 16px rgba(30,58,95,0.05);"><label style="font-size:11px;color:#6B7A8D;display:block;margin-bottom:5px;">Épargne prévue</label><input id="c_epargne" class="ob-in" type="number" placeholder="100" style="border:none;background:transparent;padding:0;font-size:17px;font-weight:700;"></div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:9px;background:rgba(77,190,219,0.10);border:1px solid rgba(77,190,219,0.35);border-radius:12px;padding:12px 14px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2E6DA4" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:1px;"><path d="M9 18h6M10 21h4"></path><path d="M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.3 1 2.5h6c0-1.2.3-1.8 1-2.5A6 6 0 0 0 12 3z"></path></svg>
+            <span style="font-size:12.5px;color:#6B7A8D;line-height:1.45;">Tu pourras ajouter ou modifier ces charges à tout moment depuis l'app.</span>
+          </div>
+        </div>
+
+        <!-- STEP 4 -->
+        <div style="display:{{ s4 }};flex-direction:column;">
+          <div style="font-size:11px;font-weight:700;color:#4DBEDB;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Étape 4 sur 6</div>
+          <div style="font-size:23px;font-weight:800;line-height:1.25;margin-bottom:6px;">Tes objectifs financiers</div>
+          <div style="font-size:14px;color:#6B7A8D;line-height:1.5;margin-bottom:22px;">Choisis ce qui compte le plus pour toi. Tirely adaptera ses conseils en conséquence.</div>
+          <div onClick="{{ tg0 }}" style="{{ goal0 }}"><span style="{{ goalIc0 }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"></circle><path d="M14.6 9.4A3.8 3.8 0 0 0 9 12.8a3.8 3.8 0 0 0 5.6 3.4"></path><path d="M8 11.4h5M8 13.4h5"></path></svg></span><div style="flex:1;"><div style="font-size:14px;font-weight:600;color:#1E3A5F;">Mieux épargner</div><div style="font-size:11px;color:#6B7A8D;margin-top:2px;">Mettre de l'argent de côté chaque mois</div></div><span style="{{ chk0 }}"></span></div>
+          <div onClick="{{ tg1 }}" style="{{ goal1 }}"><span style="{{ goalIc1 }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7l6 6 3.5-3.5L20 16"></path><path d="M20 11.5V16h-4.5"></path></svg></span><div style="flex:1;"><div style="font-size:14px;font-weight:600;color:#1E3A5F;">Réduire mes dépenses</div><div style="font-size:11px;color:#6B7A8D;margin-top:2px;">Identifier les postes où couper</div></div><span style="{{ chk1 }}"></span></div>
+          <div onClick="{{ tg2 }}" style="{{ goal2 }}"><span style="{{ goalIc2 }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13.5 20 5l-4.5 15-3.2-6.3z"></path><path d="M12.3 13.7 20 5"></path></svg></span><div style="flex:1;"><div style="font-size:14px;font-weight:600;color:#1E3A5F;">Financer un projet</div><div style="font-size:11px;color:#6B7A8D;margin-top:2px;">Voyage, achat, formation...</div></div><span style="{{ chk2 }}"></span></div>
+          <div onClick="{{ tg3 }}" style="{{ goal3 }}"><span style="{{ goalIc3 }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V4"></path><path d="M4 20h16"></path><path d="M8 17v-4M13 17v-7M18 17v-3"></path></svg></span><div style="flex:1;"><div style="font-size:14px;font-weight:600;color:#1E3A5F;">Mieux visualiser</div><div style="font-size:11px;color:#6B7A8D;margin-top:2px;">Comprendre où part mon argent</div></div><span style="{{ chk3 }}"></span></div>
+          <div onClick="{{ tg4 }}" style="{{ goal4 }}"><span style="{{ goalIc4 }}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4 3 19h18z"></path><path d="M12 10v4M12 17h.01"></path></svg></span><div style="flex:1;"><div style="font-size:14px;font-weight:600;color:#1E3A5F;">Éviter les découverts</div><div style="font-size:11px;color:#6B7A8D;margin-top:2px;">Être alerté avant de dépasser mon budget</div></div><span style="{{ chk4 }}"></span></div>
+        </div>
+
+        <!-- STEP 5 -->
+        <div style="display:{{ s5 }};flex-direction:column;">
+          <div style="font-size:11px;font-weight:700;color:#4DBEDB;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Étape 5 sur 6</div>
+          <div style="font-size:23px;font-weight:800;line-height:1.25;margin-bottom:6px;">Tes préférences</div>
+          <div style="font-size:14px;color:#6B7A8D;line-height:1.5;margin-bottom:22px;">Personnalise l'expérience Tirely selon ton style de gestion.</div>
+          <label style="font-size:12px;font-weight:600;color:#6B7A8D;display:block;margin-bottom:10px;">Fréquence de saisie préférée</label>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:20px;">
+            <div onClick="{{ setFr0 }}" style="{{ fr0 }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="15" rx="2"></rect><path d="M4 9h16M8 3v4M16 3v4"></path><path d="M12 13v3M10.5 14.5h3"></path></svg><span style="font-size:11.5px;font-weight:600;color:#1E3A5F;text-align:center;">Au fil de l'eau</span></div>
+            <div onClick="{{ setFr1 }}" style="{{ fr1 }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="15" rx="2"></rect><path d="M4 9h16M8 3v4M16 3v4"></path><path d="M7 13h10"></path></svg><span style="font-size:11.5px;font-weight:600;color:#1E3A5F;text-align:center;">Hebdomadaire</span></div>
+            <div onClick="{{ setFr2 }}" style="{{ fr2 }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="15" rx="2"></rect><path d="M4 9h16M8 3v4M16 3v4"></path><rect x="7.5" y="12" width="3.5" height="3.5" rx="0.8"></rect></svg><span style="font-size:11.5px;font-weight:600;color:#1E3A5F;text-align:center;">Mensuel</span></div>
+          </div>
+          <label style="font-size:12px;font-weight:600;color:#6B7A8D;display:block;margin-bottom:10px;">Catégories qui te concernent</label>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;">
+            <sc-for list="{{ tags }}" as="t" hint-placeholder-count="10">
+              <div onClick="{{ t.onClick }}" style="{{ t.style }}">{{ t.label }}</div>
+            </sc-for>
+          </div>
+          <label style="font-size:12px;font-weight:600;color:#6B7A8D;display:block;margin-bottom:10px;">Notifications &amp; rappels</label>
+          <div style="display:flex;align-items:center;justify-content:space-between;background:#fff;border:1px solid #D4E4F0;border-radius:12px;padding:13px 15px;margin-bottom:10px;box-shadow:0 4px 16px rgba(30,58,95,0.05);">
+            <div style="flex:1;"><div style="font-size:14px;font-weight:600;color:#1E3A5F;">Alertes dépassement</div><div style="font-size:11px;color:#6B7A8D;margin-top:2px;">Prévenu quand tu dépasses un budget</div></div>
+            <div onClick="{{ tgAlert }}" style="{{ swAlert }}"><div style="{{ swAlertThumb }}"></div></div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;background:#fff;border:1px solid #D4E4F0;border-radius:12px;padding:13px 15px;box-shadow:0 4px 16px rgba(30,58,95,0.05);">
+            <div style="flex:1;"><div style="font-size:14px;font-weight:600;color:#1E3A5F;">Rappel de saisie</div><div style="font-size:11px;color:#6B7A8D;margin-top:2px;">Rappel hebdomadaire pour mettre à jour</div></div>
+            <div onClick="{{ tgRappel }}" style="{{ swRappel }}"><div style="{{ swRappelThumb }}"></div></div>
+          </div>
+        </div>
+
+        <!-- STEP 6 -->
+        <div style="display:{{ s6 }};flex-direction:column;align-items:center;text-align:center;padding-top:14px;">
+          <div style="width:88px;height:88px;border-radius:50%;background:rgba(76,175,130,0.14);display:flex;align-items:center;justify-content:center;margin-bottom:18px;">
+            <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#4CAF82" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M8 12.5l2.6 2.6L16 9"></path></svg>
+          </div>
+          <div style="font-size:24px;font-weight:800;margin-bottom:8px;">Tout est prêt !</div>
+          <div style="font-size:14px;color:#6B7A8D;line-height:1.55;margin-bottom:24px;max-width:300px;">Tirely a configuré ton espace budget. Tu peux commencer à saisir tes premières dépenses dès maintenant.</div>
+          <div style="width:100%;background:#fff;border:1px solid #D4E4F0;border-radius:16px;padding:16px;text-align:left;box-shadow:0 4px 16px rgba(30,58,95,0.05);">
+            <div style="font-size:12px;color:#6B7A8D;font-weight:600;margin-bottom:10px;">Ton résumé</div>
+            <div style="display:flex;justify-content:space-between;font-size:13px;padding:8px 0;border-bottom:1px solid #D4E4F0;"><span style="color:#6B7A8D;">Revenus estimés</span><span style="color:#4CAF82;font-weight:700;">{{ sumIncome }}</span></div>
+            <div style="display:flex;justify-content:space-between;font-size:13px;padding:8px 0;border-bottom:1px solid #D4E4F0;"><span style="color:#6B7A8D;">Charges fixes</span><span style="color:#E8695B;font-weight:700;">{{ sumCharges }}</span></div>
+            <div style="display:flex;justify-content:space-between;font-size:13px;padding:8px 0;"><span style="color:#6B7A8D;">Reste à vivre</span><span style="color:#2E6DA4;font-weight:700;">{{ sumReste }}</span></div>
+          </div>
+          <div style="width:100%;margin-top:16px;background:rgba(77,190,219,0.08);border:1px solid rgba(77,190,219,0.35);border-radius:16px;padding:16px;text-align:left;">
+            <div style="font-size:14px;font-weight:700;color:#1E3A5F;margin-bottom:4px;">Créer un compte ? C'est toi qui vois.</div>
+            <div style="font-size:12.5px;color:#6B7A8D;line-height:1.45;">Un compte sert seulement à retrouver tes données sur un autre appareil. <b style="color:#1E3A5F;">Tirely marche parfaitement sans</b> — tout reste sur ton téléphone, aucune connexion bancaire.</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- FOOTER -->
+      <div style="padding:14px 24px 22px;flex-shrink:0;background:#fff;border-top:1px solid #D4E4F0;">
+        <button onClick="{{ next }}" style="display:{{ nextDisp }};width:100%;background:#4DBEDB;border:none;border-radius:14px;padding:15px;font-size:16px;font-weight:700;color:#fff;cursor:pointer;font-family:inherit;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 12px rgba(77,190,219,0.35);">Continuer <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+        <a href="./Tirely.dc.html" onClick="{{ saveAndStart }}" style="display:{{ startDisp }};width:100%;background:#4DBEDB;border:none;border-radius:14px;padding:15px;font-size:16px;font-weight:700;color:#fff;cursor:pointer;font-family:inherit;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 12px rgba(77,190,219,0.35);">Créer un compte <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+        <a href="./Tirely.dc.html" onClick="{{ saveAndStart }}" style="display:{{ startDisp }};width:100%;background:transparent;border:1.5px solid #D4E4F0;border-radius:14px;padding:13px;font-size:15px;font-weight:700;color:#2E6DA4;cursor:pointer;font-family:inherit;align-items:center;justify-content:center;gap:8px;margin-top:10px;box-sizing:border-box;">Continuer sans compte</a>
+        <button onClick="{{ prev }}" style="display:{{ backDisp }};width:100%;background:transparent;border:none;color:#6B7A8D;font-size:14px;cursor:pointer;font-family:inherit;margin-top:8px;padding:8px;font-weight:600;">← Retour</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    step: 1,
+    sit: 0,
+    stat: 0,
+    revenu: 1500,
+    freq: 0,
+    goals: [true, true, false, false, false],
+    tags: [true, true, true, false, false, false, false, false, false, false],
+    notif: { alert: true, rappel: false },
+    sum: null,
+  };
+
+  tagLabels = ['Logement','Courses','Transport','Resto / livraison','Jeux / streaming','Santé','Shopping','Sport','Voyages','Formation'];
+
+  fmt(n) {
+    return Math.round(n).toLocaleString('fr-FR').replace(/\u202f/g,'\u2009') + ' €';
+  }
+
+  computeSum() {
+    const ids = ['c_loyer','c_tel','c_net','c_trans','c_abo','c_epargne'];
+    let t = 0;
+    ids.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && el.value !== '') {
+        const v = parseFloat(String(el.value).replace(',', '.'));
+        if (!isNaN(v)) t += v;
+      }
+    });
+    return { income: this.state.revenu, charges: t, reste: this.state.revenu - t };
+  }
+
+  saveAndStart = () => {
+    const map = [
+      ['c_loyer','Loyer','Logement'],
+      ['c_tel','T\u00e9l\u00e9phone','Abonnements'],
+      ['c_net','Internet','Abonnements'],
+      ['c_trans','Transport','Transport'],
+      ['c_abo','Abonnements','Abonnements'],
+      ['c_epargne','\u00c9pargne pr\u00e9vue','Divers'],
+    ];
+    const charges = [];
+    map.forEach(([id,label,category], i) => {
+      const el = document.getElementById(id);
+      if (el && el.value !== '') {
+        const v = parseFloat(String(el.value).replace(',', '.'));
+        if (!isNaN(v) && v > 0) charges.push({ id: 'c'+i, label, amount: v, category, day: 5 });
+      }
+    });
+    const nameEl = document.getElementById('ob_name');
+    const name = nameEl && nameEl.value.trim() ? nameEl.value.trim() : '';
+    try {
+      localStorage.setItem('tirely_data', JSON.stringify({ name, income: this.state.revenu, currency: '\u20AC', transactions: [], charges, notif: { oubli:true, seuil:true, resume:false }, premium:false }));
+      localStorage.setItem('tirely_onboarded', '1');
+    } catch(e) {}
+  };
+
+  next = () => {
+    const s = this.state;
+    if (s.step < 6) {
+      const ns = s.step + 1;
+      const patch = { step: ns };
+      if (ns === 6) patch.sum = this.computeSum();
+      this.setState(patch);
+    }
+  };
+  prev = () => { if (this.state.step > 1) this.setState({ step: this.state.step - 1 }); };
+
+  card(sel) {
+    const base = 'border-radius:14px;padding:15px 12px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:7px;text-align:center;transition:all 0.18s;border:1px solid ';
+    return sel
+      ? base + '#4DBEDB;background:rgba(77,190,219,0.10);color:#4DBEDB;'
+      : base + '#D4E4F0;background:#fff;color:#6B7A8D;';
+  }
+
+  goalRow(sel) {
+    const base = 'display:flex;align-items:center;gap:12px;border-radius:14px;padding:13px 15px;margin-bottom:10px;cursor:pointer;transition:all 0.18s;border:1px solid ';
+    return sel
+      ? base + '#4DBEDB;background:rgba(77,190,219,0.08);'
+      : base + '#D4E4F0;background:#fff;';
+  }
+  goalIcon(sel) {
+    return 'display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:11px;flex-shrink:0;background:' +
+      (sel ? 'rgba(77,190,219,0.16);color:#2E6DA4;' : '#EEF3FA;color:#6B7A8D;');
+  }
+  check(sel) {
+    const base = 'width:22px;height:22px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;';
+    return sel
+      ? base + "border:1.5px solid #4DBEDB;background:#4DBEDB;background-image:url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><path d='M5 12l5 5L20 6'/></svg>\");background-repeat:no-repeat;background-position:center;"
+      : base + 'border:1.5px solid #D4E4F0;';
+  }
+
+  tagPill(sel) {
+    const base = 'padding:8px 14px;border-radius:20px;font-size:13px;cursor:pointer;border:1px solid ;transition:all 0.15s;'.replace('border:1px solid ;','');
+    const b = 'padding:8px 14px;border-radius:20px;font-size:13px;cursor:pointer;transition:all 0.15s;border:1px solid ';
+    return sel
+      ? b + '#4DBEDB;background:rgba(77,190,219,0.14);color:#2E6DA4;font-weight:600;'
+      : b + '#D4E4F0;background:#fff;color:#6B7A8D;';
+  }
+
+  freqCard(sel) {
+    const base = 'border-radius:14px;padding:12px 6px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px;transition:all 0.18s;border:1px solid ';
+    return sel
+      ? base + '#4DBEDB;background:rgba(77,190,219,0.10);color:#4DBEDB;'
+      : base + '#D4E4F0;background:#fff;color:#6B7A8D;';
+  }
+
+  sw(on) {
+    return 'width:46px;height:27px;border-radius:14px;position:relative;cursor:pointer;flex-shrink:0;transition:background 0.2s;background:' + (on ? '#4DBEDB' : '#D4E4F0') + ';';
+  }
+  swThumb(on) {
+    return 'width:21px;height:21px;border-radius:50%;background:#fff;position:absolute;top:3px;transition:left 0.2s;box-shadow:0 1px 3px rgba(0,0,0,0.2);left:' + (on ? '22px' : '3px') + ';';
+  }
+
+  renderVals() {
+    const s = this.state;
+    const disp = (n) => s.step === n ? 'flex' : 'none';
+    const prog = [1,2,3,4,5,6].map(i => ({
+      style: 'height:6px;border-radius:3px;flex:1;transition:background 0.3s;background:' + (i <= s.step ? '#4DBEDB' : '#D4E4F0') + ';',
+    }));
+    const tags = this.tagLabels.map((label, i) => ({
+      label,
+      style: this.tagPill(s.tags[i]),
+      onClick: () => { const t = s.tags.slice(); t[i] = !t[i]; this.setState({ tags: t }); },
+    }));
+    const sum = s.sum || { income: s.revenu, charges: 0, reste: s.revenu };
+
+    return {
+      prog,
+      s1: disp(1), s2: disp(2), s3: disp(3), s4: disp(4), s5: disp(5), s6: disp(6),
+
+      next: this.next,
+      prev: this.prev,
+      saveAndStart: this.saveAndStart,
+      nextDisp: s.step < 6 ? 'inline-flex' : 'none',
+      startDisp: s.step === 6 ? 'inline-flex' : 'none',
+      backDisp: s.step > 1 && s.step < 6 ? 'block' : 'none',
+
+      setSit0: () => this.setState({ sit: 0 }),
+      setSit1: () => this.setState({ sit: 1 }),
+      setSit2: () => this.setState({ sit: 2 }),
+      setSit3: () => this.setState({ sit: 3 }),
+      sit0: this.card(s.sit === 0), sit1: this.card(s.sit === 1),
+      sit2: this.card(s.sit === 2), sit3: this.card(s.sit === 3),
+
+      setStat0: () => this.setState({ stat: 0 }),
+      setStat1: () => this.setState({ stat: 1 }),
+      setStat2: () => this.setState({ stat: 2 }),
+      setStat3: () => this.setState({ stat: 3 }),
+      stat0: this.card(s.stat === 0), stat1: this.card(s.stat === 1),
+      stat2: this.card(s.stat === 2), stat3: this.card(s.stat === 3),
+
+      revenu: s.revenu,
+      revenuText: this.fmt(s.revenu),
+      setRevenu: (e) => this.setState({ revenu: parseInt(e.target.value, 10) }),
+
+      tg0: () => this.toggleGoal(0), tg1: () => this.toggleGoal(1), tg2: () => this.toggleGoal(2),
+      tg3: () => this.toggleGoal(3), tg4: () => this.toggleGoal(4),
+      goal0: this.goalRow(s.goals[0]), goal1: this.goalRow(s.goals[1]), goal2: this.goalRow(s.goals[2]),
+      goal3: this.goalRow(s.goals[3]), goal4: this.goalRow(s.goals[4]),
+      goalIc0: this.goalIcon(s.goals[0]), goalIc1: this.goalIcon(s.goals[1]), goalIc2: this.goalIcon(s.goals[2]),
+      goalIc3: this.goalIcon(s.goals[3]), goalIc4: this.goalIcon(s.goals[4]),
+      chk0: this.check(s.goals[0]), chk1: this.check(s.goals[1]), chk2: this.check(s.goals[2]),
+      chk3: this.check(s.goals[3]), chk4: this.check(s.goals[4]),
+
+      setFr0: () => this.setState({ freq: 0 }),
+      setFr1: () => this.setState({ freq: 1 }),
+      setFr2: () => this.setState({ freq: 2 }),
+      fr0: this.freqCard(s.freq === 0), fr1: this.freqCard(s.freq === 1), fr2: this.freqCard(s.freq === 2),
+
+      tags,
+
+      tgAlert: () => this.setState({ notif: { ...s.notif, alert: !s.notif.alert } }),
+      tgRappel: () => this.setState({ notif: { ...s.notif, rappel: !s.notif.rappel } }),
+      swAlert: this.sw(s.notif.alert), swAlertThumb: this.swThumb(s.notif.alert),
+      swRappel: this.sw(s.notif.rappel), swRappelThumb: this.swThumb(s.notif.rappel),
+
+      sumIncome: this.fmt(sum.income),
+      sumCharges: this.fmt(sum.charges),
+      sumReste: this.fmt(sum.reste),
+    };
+  }
+
+  toggleGoal(i) {
+    const g = this.state.goals.slice();
+    g[i] = !g[i];
+    this.setState({ goals: g });
+  }
+}
+</script>
+</body>
+</html>

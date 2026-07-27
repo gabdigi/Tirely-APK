@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./offline.js"></script>
+<script src="./vendor/react.production.min.js"></script>
+<script src="./vendor/react-dom.production.min.js"></script>
+<link rel="stylesheet" href="./open-sans.css">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="manifest" href="./manifest.webmanifest">
+<meta name="theme-color" content="#4DBEDB">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Tirely">
+<link rel="apple-touch-icon" href="./icons/icon-180.png">
+<script>
+</script>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; }
+  a { color: #4DBEDB; text-decoration: none; }
+  a:hover { color: #2E6DA4; }
+  .tir-scroll::-webkit-scrollbar { display: none; }
+  .tir-scroll { scrollbar-width: none; }
+  .tir-scroll-show { scrollbar-width: thin; scrollbar-color: #C3D6E6 transparent; }
+  .tir-scroll-show::-webkit-scrollbar { width: 6px; }
+  .tir-scroll-show::-webkit-scrollbar-thumb { background: #C3D6E6; border-radius: 999px; }
+  .tir-scroll-show::-webkit-scrollbar-track { background: transparent; }
+  @keyframes tirDot { 0%,60%,100%{opacity:0.3;transform:translateY(0);} 30%{opacity:1;transform:translateY(-3px);} }
+  @media (min-width: 481px){
+    .tir-desk{ padding:24px; }
+    .tir-bezel{ height:min(940px,calc(100dvh - 48px)); border-radius:28px; box-shadow:0 24px 70px rgba(30,58,95,0.22); }
+    .tir-screen{ border-radius:28px; }
+  }
+</style>
+</helmet>
+
+<div class="tir-desk" style="min-height:100vh;min-height:100dvh;background:#E4EEF5;display:flex;align-items:center;justify-content:center;padding:0;font-family:'Open Sans',sans-serif;">
+
+  <div class="tir-bezel" style="position:relative;width:100%;max-width:480px;height:100dvh;height:100svh;background:#F0F8FA;overflow:hidden;">
+    <div class="tir-screen" style="position:relative;width:100%;height:100%;background:#F0F8FA;overflow:hidden;color:#1E3A5F;">
+
+      <!-- CONTENT AREA -->
+      <div style="position:absolute;top:0;left:0;right:0;bottom:0;overflow:hidden;">
+
+        <!-- ============ ACCUEIL ============ -->
+        <div class="tir-scroll" style="height:100%;overflow-y:auto;padding-bottom:96px;display:{{ homeDisp }};flex-direction:column;">
+          <div style="padding:14px 20px 0;display:flex;align-items:flex-start;justify-content:space-between;">
+            <div>
+              <div style="font-size:14px;color:#6B7A8D;">Bonjour 👋</div>
+              <div style="font-size:24px;font-weight:700;line-height:1.15;">{{ name }}</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <button onClick="{{ goAssistant }}" style="background:#4DBEDB;color:#fff;border:none;border-radius:12px;padding:10px 16px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 4px 12px rgba(77,190,219,0.35);">Conseiller</button>
+              <button onClick="{{ goProfile }}" style="width:40px;height:40px;border-radius:12px;background:#EEF3FA;border:1px solid #D4E4F0;display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2E6DA4" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 13.5a7.7 7.7 0 0 0 0-3l1.7-1.3-1.8-3.1-2 .8a7.6 7.6 0 0 0-2.6-1.5L14 2h-4l-.4 2.4a7.6 7.6 0 0 0-2.6 1.5l-2-.8-1.8 3.1 1.7 1.3a7.7 7.7 0 0 0 0 3l-1.7 1.3 1.8 3.1 2-.8a7.6 7.6 0 0 0 2.6 1.5L10 22h4l.4-2.4a7.6 7.6 0 0 0 2.6-1.5l2 .8 1.8-3.1z"></path></svg></button>
+            </div>
+          </div>
+
+          <div style="display:flex;flex-direction:column;align-items:center;padding:20px 0 8px;">
+            <div style="position:relative;width:188px;height:188px;">
+              <svg width="188" height="188" viewBox="0 0 188 188">
+                <circle cx="94" cy="94" r="80" fill="none" stroke="#EEF3FA" stroke-width="15"></circle>
+                <circle cx="94" cy="94" r="80" fill="none" stroke="{{ ravColor }}" stroke-width="15" stroke-linecap="round" stroke-dasharray="{{ ravDash }}" transform="rotate(-90 94 94)"></circle>
+              </svg>
+              <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;">
+                <div style="font-size:35px;font-weight:700;line-height:1;letter-spacing:-1px;color:#1E3A5F;">{{ ravText }}</div>
+                <div style="font-size:13px;color:#6B7A8D;margin-top:4px;">reste à vivre</div>
+              </div>
+            </div>
+            <div style="font-size:13px;color:#6B7A8D;margin-top:10px;">{{ budgetLine }}</div>
+          </div>
+
+          <div style="display:flex;gap:10px;padding:16px 16px 4px;">
+            <div style="flex:1;background:#fff;border:1px solid #D4E4F0;border-radius:16px;padding:12px;box-shadow:0 4px 16px rgba(30,58,95,0.05);">
+              <div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#6B7A8D;font-weight:600;margin-bottom:6px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#4CAF82" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V5M6 11l6-6 6 6"></path></svg>Revenus</div>
+              <div style="font-size:16px;font-weight:700;color:#4CAF82;">{{ miniIncome }}</div>
+            </div>
+            <div style="flex:1;background:#fff;border:1px solid #D4E4F0;border-radius:16px;padding:12px;box-shadow:0 4px 16px rgba(30,58,95,0.05);">
+              <div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#6B7A8D;font-weight:600;margin-bottom:6px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#E8695B" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v15M6 13l6 6 6-6"></path></svg>Dépenses</div>
+              <div style="font-size:16px;font-weight:700;color:#E8695B;">{{ miniSpent }}</div>
+            </div>
+            <div style="flex:1;background:#fff;border:1px solid #D4E4F0;border-radius:16px;padding:12px;box-shadow:0 4px 16px rgba(30,58,95,0.05);">
+              <div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#6B7A8D;font-weight:600;margin-bottom:6px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#2E6DA4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7l8-4 8 4v3H4z"></path><path d="M6 10v7M18 10v7M3 20h18"></path></svg>Charges</div>
+              <div style="font-size:16px;font-weight:700;color:#2E6DA4;">{{ miniCharges }}</div>
+            </div>
+          </div>
+
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:18px 20px 6px;">
+            <div style="font-size:16px;font-weight:700;">Dernières transactions</div>
+            <a href="#" onClick="{{ goBilan }}" style="font-size:13px;font-weight:600;">Voir tout</a>
+          </div>
+          <div style="padding:0 16px;">
+            <sc-for list="{{ recent }}" as="t" hint-placeholder-count="3">
+              <div style="display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid #D4E4F0;">
+                <div style="width:42px;height:42px;border-radius:13px;background:{{ t.tint }};display:flex;align-items:center;justify-content:center;flex-shrink:0;">{{ t.iconEl }}</div>
+                <div style="flex:1;"><div style="font-size:14px;font-weight:600;">{{ t.label }}</div><div style="font-size:11px;color:#6B7A8D;margin-top:1px;">{{ t.sub }}</div></div>
+                <div style="font-size:14px;font-weight:700;color:{{ t.amtColor }};">{{ t.amtText }}</div>
+              </div>
+            </sc-for>
+            <sc-if value="{{ noTx }}" hint-placeholder-val="{{ false }}">
+      <div style="text-align:center;padding:30px 22px;color:#6B7A8D;">
+        <div style="width:56px;height:56px;border-radius:16px;background:#EEF3FA;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#B7C7D6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v4M12 16h.01"></path></svg></div>
+        <div style="font-size:14px;font-weight:600;color:#1E3A5F;margin-bottom:4px;">Aucune transaction</div>
+        <div style="font-size:12.5px;line-height:1.45;">Appuie sur le bouton + pour saisir ta première dépense.</div>
+      </div>
+            </sc-if>
+          </div>
+        </div>
+
+        <!-- ============ VISUALISATION ============ -->
+        <div class="tir-scroll" style="height:100%;overflow-y:auto;padding-bottom:96px;display:{{ vizDisp }};flex-direction:column;">
+          <div style="display:flex;align-items:center;gap:12px;padding:14px 16px 16px;">
+            <button onClick="{{ goHome }}" style="width:36px;height:36px;border-radius:11px;background:#EEF3FA;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1E3A5F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:block;"><path d="M20 12H4"></path><path d="M10 6l-6 6 6 6"></path></svg></button>
+            <div style="font-size:18px;font-weight:700;">Visualisation des dépenses</div>
+          </div>
+          <sc-if value="{{ hasViz }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;align-items:center;gap:16px;padding:6px 20px 20px;">
+            <svg width="150" height="150" viewBox="0 0 150 150">
+              <circle cx="75" cy="75" r="55" fill="none" stroke="#EEF3FA" stroke-width="22"></circle>
+              <sc-for list="{{ donut }}" as="d" hint-placeholder-count="3">
+                <circle cx="75" cy="75" r="55" fill="none" stroke="{{ d.color }}" stroke-width="22" stroke-dasharray="{{ d.dash }}" stroke-dashoffset="{{ d.offset }}" transform="rotate(-90 75 75)"></circle>
+              </sc-for>
+              <text x="75" y="72" text-anchor="middle" fill="#1E3A5F" font-size="17" font-weight="700" font-family="Open Sans">{{ vizTotal }}</text>
+              <text x="75" y="88" text-anchor="middle" fill="#6B7A8D" font-size="10" font-family="Open Sans">ce mois</text>
+            </svg>
+            <div style="flex:1;display:flex;flex-direction:column;gap:9px;">
+              <sc-for list="{{ legend }}" as="l" hint-placeholder-count="4">
+                <div style="display:flex;align-items:center;gap:8px;font-size:12.5px;"><span style="width:10px;height:10px;border-radius:3px;background:{{ l.color }};"></span>{{ l.name }}<span style="margin-left:auto;color:#6B7A8D;font-weight:600;">{{ l.pct }}</span></div>
+              </sc-for>
+            </div>
+          </div>
+          <div style="padding:0 16px;">
+            <sc-for list="{{ vizList }}" as="c" hint-placeholder-count="4">
+              <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #D4E4F0;">
+                <div style="width:38px;height:38px;border-radius:11px;background:{{ c.tint }};display:flex;align-items:center;justify-content:center;flex-shrink:0;">{{ c.iconEl }}</div>
+                <div style="flex:1;font-size:14px;font-weight:600;">{{ c.name }}</div>
+                <div style="font-size:14px;font-weight:700;color:#E8695B;">{{ c.amtText }}</div>
+              </div>
+            </sc-for>
+          </div>
+          </sc-if>
+          <sc-if value="{{ noViz }}" hint-placeholder-val="{{ true }}">
+      <div style="text-align:center;padding:30px 22px;color:#6B7A8D;">
+        <div style="width:56px;height:56px;border-radius:16px;background:#EEF3FA;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#B7C7D6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v4M12 16h.01"></path></svg></div>
+        <div style="font-size:14px;font-weight:600;color:#1E3A5F;margin-bottom:4px;">Rien à visualiser</div>
+        <div style="font-size:12.5px;line-height:1.45;">Ajoute des dépenses ce mois-ci pour voir leur répartition par catégorie.</div>
+      </div>
+          </sc-if>
+        </div>
+
+        <!-- ============ CHARGES ============ -->
+        <div class="tir-scroll" style="height:100%;overflow-y:auto;padding-bottom:96px;display:{{ chargesDisp }};flex-direction:column;">
+          <div style="display:flex;align-items:center;gap:12px;padding:14px 16px 16px;">
+            <button onClick="{{ goHome }}" style="width:36px;height:36px;border-radius:11px;background:#EEF3FA;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1E3A5F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:block;"><path d="M20 12H4"></path><path d="M10 6l-6 6 6 6"></path></svg></button>
+            <div style="font-size:18px;font-weight:700;">Charges fixes</div>
+          </div>
+          <div style="display:flex;gap:10px;padding:0 16px 8px;">
+            <div style="flex:1;background:#fff;border:1px solid #D4E4F0;border-radius:16px;padding:13px;box-shadow:0 4px 16px rgba(30,58,95,0.05);"><div style="font-size:11px;color:#6B7A8D;font-weight:600;margin-bottom:5px;">Total mensuel</div><div style="font-size:19px;font-weight:700;color:#E8695B;">{{ chargesTotal }}</div></div>
+            <div style="flex:1;background:#fff;border:1px solid #D4E4F0;border-radius:16px;padding:13px;box-shadow:0 4px 16px rgba(30,58,95,0.05);"><div style="font-size:11px;color:#6B7A8D;font-weight:600;margin-bottom:5px;">Nb de charges</div><div style="font-size:19px;font-weight:700;color:#2E6DA4;">{{ chargesCount }}</div></div>
+          </div>
+          <div style="font-size:14px;font-weight:700;padding:14px 20px 4px;">Récurrentes ce mois</div>
+          <div style="padding:0 16px;">
+            <sc-for list="{{ chargesList }}" as="c" hint-placeholder-count="3">
+              <div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #D4E4F0;">
+                <div style="width:42px;height:42px;border-radius:13px;background:{{ c.tint }};display:flex;align-items:center;justify-content:center;flex-shrink:0;">{{ c.iconEl }}</div>
+                <div style="flex:1;"><div style="font-size:14px;font-weight:600;">{{ c.label }}</div><div style="font-size:11px;color:#6B7A8D;margin-top:1px;">{{ c.sub }}</div></div>
+                <div style="display:flex;align-items:center;gap:8px;"><div style="font-size:14px;font-weight:700;color:#E8695B;">{{ c.amtText }}</div><button onClick="{{ c.edit }}" style="width:30px;height:30px;border-radius:9px;background:rgba(77,190,219,0.14);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2E6DA4" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="display:block;"><path d="M4 20l1.2-4.2L16 5l3 3L8.2 18.8z"></path><path d="M14 7l3 3"></path></svg></button><button onClick="{{ c.remove }}" style="width:30px;height:30px;border-radius:9px;background:rgba(245,166,35,0.14);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#F5A623" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="display:block;"><path d="M4 7h16M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2M6 7l1 13a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1l1-13"></path></svg></button></div>
+              </div>
+            </sc-for>
+            <sc-if value="{{ noCharges }}" hint-placeholder-val="{{ false }}">
+      <div style="text-align:center;padding:30px 22px;color:#6B7A8D;">
+        <div style="width:56px;height:56px;border-radius:16px;background:#EEF3FA;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#B7C7D6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v4M12 16h.01"></path></svg></div>
+        <div style="font-size:14px;font-weight:600;color:#1E3A5F;margin-bottom:4px;">Aucune charge fixe</div>
+        <div style="font-size:12.5px;line-height:1.45;">Ajoute tes charges récurrentes (loyer, forfait…) pour affiner ton reste à vivre.</div>
+      </div>
+            </sc-if>
+          </div>
+          <button onClick="{{ openChargeAdd }}" style="margin:14px 16px 0;background:rgba(77,190,219,0.12);border:1px dashed #4DBEDB;border-radius:14px;padding:14px;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;width:calc(100% - 32px);font-family:inherit;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2E6DA4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:block;"><path d="M12 5v14M5 12h14"></path></svg>
+            <span style="font-size:14px;font-weight:600;color:#2E6DA4;">Ajouter une charge fixe</span>
+          </button>
+        </div>
+
+        <!-- ============ BILAN ============ -->
+        <div class="tir-scroll" style="height:100%;overflow-y:auto;padding-bottom:96px;display:{{ bilanDisp }};flex-direction:column;">
+          <div style="display:flex;align-items:center;gap:12px;padding:14px 16px 16px;">
+            <button onClick="{{ goHome }}" style="width:36px;height:36px;border-radius:11px;background:#EEF3FA;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1E3A5F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:block;"><path d="M20 12H4"></path><path d="M10 6l-6 6 6 6"></path></svg></button>
+            <div style="flex:1;font-size:18px;font-weight:700;">Bilan</div>
+            <button onClick="{{ openTxBilan }}" style="display:flex;align-items:center;gap:6px;height:36px;padding:0 13px;border-radius:11px;background:#4DBEDB;border:none;color:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 4px 12px rgba(77,190,219,0.35);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"></path></svg>Ajouter</button>
+          </div>
+          <div style="display:flex;gap:6px;margin:0 16px 14px;background:#EEF3FA;border:1px solid #D4E4F0;border-radius:13px;padding:4px;">
+            <button onClick="{{ setBilanMois }}" style="{{ tabMoisStyle }}">Mensuel</button>
+            <button onClick="{{ setBilanAnnee }}" style="{{ tabAnneeStyle }}">Annuel</button>
+          </div>
+          <sc-if value="{{ bilanIsMonth }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;align-items:center;gap:10px;padding:0 16px 14px;">
+            <button onClick="{{ prevMonth }}" style="width:34px;height:34px;border-radius:10px;background:#EEF3FA;border:1px solid #D4E4F0;display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E3A5F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg></button>
+            <div style="flex:1;text-align:center;font-size:14px;font-weight:700;background:#EEF3FA;border:1px solid #D4E4F0;padding:8px;border-radius:10px;">{{ monthLabel }}</div>
+            <button onClick="{{ nextMonth }}" style="width:34px;height:34px;border-radius:10px;background:#EEF3FA;border:1px solid #D4E4F0;display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E3A5F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"></path></svg></button>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 16px 12px;">
+            <div style="background:#fff;border:1px solid #D4E4F0;border-radius:16px;padding:14px;box-shadow:0 4px 16px rgba(30,58,95,0.05);"><div style="font-size:11px;color:#6B7A8D;font-weight:600;margin-bottom:6px;">Revenus</div><div style="font-size:20px;font-weight:700;color:#4CAF82;">{{ bilanIncome }}</div></div>
+            <div style="background:#fff;border:1px solid #D4E4F0;border-radius:16px;padding:14px;box-shadow:0 4px 16px rgba(30,58,95,0.05);"><div style="font-size:11px;color:#6B7A8D;font-weight:600;margin-bottom:6px;">Dépenses</div><div style="font-size:20px;font-weight:700;color:#E8695B;">{{ bilanExpense }}</div></div>
+            <div style="grid-column:1 / -1;background:#EEF3FA;border:1px solid #D4E4F0;border-radius:16px;padding:16px;"><div style="font-size:11px;color:#6B7A8D;font-weight:600;margin-bottom:6px;">Solde net du mois</div><div style="font-size:26px;font-weight:700;color:{{ bilanSoldeColor }};">{{ bilanSolde }}</div></div>
+          </div>
+          <div style="padding:0 20px 8px;">
+            <div style="font-size:13px;color:#6B7A8D;margin-bottom:12px;">Évolution 6 derniers mois</div>
+            <div style="display:flex;align-items:flex-end;gap:9px;height:100px;">
+              <sc-for list="{{ bars }}" as="b" hint-placeholder-count="6">
+                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;height:100%;justify-content:flex-end;">
+                  <div style="width:100%;border-radius:6px 6px 0 0;height:{{ b.h }};background:{{ b.color }};min-height:3px;"></div>
+                  <div style="font-size:10px;color:#6B7A8D;">{{ b.label }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+          <div style="font-size:14px;font-weight:700;padding:14px 20px 4px;">Détail des catégories</div>
+          <div style="padding:0 16px;">
+            <sc-for list="{{ bilanDetail }}" as="c" hint-placeholder-count="3">
+              <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #D4E4F0;"><div style="width:38px;height:38px;border-radius:11px;background:{{ c.tint }};display:flex;align-items:center;justify-content:center;flex-shrink:0;">{{ c.iconEl }}</div><div style="flex:1;"><div style="font-size:14px;font-weight:600;">{{ c.name }}</div><div style="font-size:11px;color:#6B7A8D;">{{ c.count }}</div></div><div style="font-size:14px;font-weight:700;color:#E8695B;">{{ c.amtText }}</div></div>
+            </sc-for>
+            <sc-if value="{{ noBilan }}" hint-placeholder-val="{{ false }}">
+      <div style="text-align:center;padding:30px 22px;color:#6B7A8D;">
+        <div style="width:56px;height:56px;border-radius:16px;background:#EEF3FA;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#B7C7D6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v4M12 16h.01"></path></svg></div>
+        <div style="font-size:14px;font-weight:600;color:#1E3A5F;margin-bottom:4px;">Pas de dépense ce mois</div>
+        <div style="font-size:12.5px;line-height:1.45;">Change de mois ou saisis des dépenses pour voir le détail.</div>
+      </div>
+            </sc-if>
+          </div>
+          </sc-if>
+          <sc-if value="{{ bilanIsYear }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;align-items:center;gap:10px;padding:0 16px 14px;">
+            <button onClick="{{ prevYear }}" style="width:34px;height:34px;border-radius:10px;background:#EEF3FA;border:1px solid #D4E4F0;display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E3A5F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg></button>
+            <div style="flex:1;text-align:center;font-size:14px;font-weight:700;background:#EEF3FA;border:1px solid #D4E4F0;padding:8px;border-radius:10px;">Année {{ yearLabel }}</div>
+            <button onClick="{{ nextYear }}" style="width:34px;height:34px;border-radius:10px;background:#EEF3FA;border:1px solid #D4E4F0;display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E3A5F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"></path></svg></button>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 16px 12px;">
+            <div style="background:#fff;border:1px solid #D4E4F0;border-radius:16px;padding:14px;box-shadow:0 4px 16px rgba(30,58,95,0.05);"><div style="font-size:11px;color:#6B7A8D;font-weight:600;margin-bottom:6px;">Revenus de l'année</div><div style="font-size:20px;font-weight:700;color:#4CAF82;">{{ yearIncome }}</div></div>
+            <div style="background:#fff;border:1px solid #D4E4F0;border-radius:16px;padding:14px;box-shadow:0 4px 16px rgba(30,58,95,0.05);"><div style="font-size:11px;color:#6B7A8D;font-weight:600;margin-bottom:6px;">Dépenses de l'année</div><div style="font-size:20px;font-weight:700;color:#E8695B;">{{ yearExpense }}</div></div>
+            <div style="grid-column:1 / -1;background:#EEF3FA;border:1px solid #D4E4F0;border-radius:16px;padding:16px;"><div style="font-size:11px;color:#6B7A8D;font-weight:600;margin-bottom:6px;">Solde net de l'année</div><div style="font-size:26px;font-weight:700;color:{{ yearSoldeColor }};">{{ yearSolde }}</div><div style="font-size:11.5px;color:#6B7A8D;margin-top:6px;">Épargne moyenne : {{ yearAvgMonth }} / mois</div></div>
+          </div>
+          <div style="padding:0 20px 8px;">
+            <div style="font-size:13px;color:#6B7A8D;margin-bottom:12px;">Dépenses mois par mois · {{ yearLabel }}</div>
+            <div style="display:flex;align-items:flex-end;gap:5px;height:100px;">
+              <sc-for list="{{ yBars }}" as="b" hint-placeholder-count="12">
+                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;height:100%;justify-content:flex-end;">
+                  <div style="width:100%;border-radius:4px 4px 0 0;height:{{ b.h }};background:{{ b.color }};min-height:3px;"></div>
+                  <div style="font-size:9px;color:#6B7A8D;">{{ b.label }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+          <div style="font-size:14px;font-weight:700;padding:14px 20px 4px;">Détail des catégories · année</div>
+          <div style="padding:0 16px;">
+            <sc-for list="{{ yearDetail }}" as="c" hint-placeholder-count="3">
+              <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #D4E4F0;"><div style="width:38px;height:38px;border-radius:11px;background:{{ c.tint }};display:flex;align-items:center;justify-content:center;flex-shrink:0;">{{ c.iconEl }}</div><div style="flex:1;"><div style="font-size:14px;font-weight:600;">{{ c.name }}</div><div style="font-size:11px;color:#6B7A8D;">{{ c.count }}</div></div><div style="font-size:14px;font-weight:700;color:#E8695B;">{{ c.amtText }}</div></div>
+            </sc-for>
+            <sc-if value="{{ noYear }}" hint-placeholder-val="{{ false }}">
+      <div style="text-align:center;padding:30px 22px;color:#6B7A8D;">
+        <div style="width:56px;height:56px;border-radius:16px;background:#EEF3FA;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#B7C7D6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="M7 14l4-4 3 3 5-6"></path></svg></div>
+        <div style="font-size:14px;font-weight:600;color:#1E3A5F;margin-bottom:4px;">Aucune donnée pour {{ yearLabel }}</div>
+        <div style="font-size:12.5px;line-height:1.45;">Change d'année ou saisis des dépenses pour voir le bilan annuel.</div>
+      </div>
+            </sc-if>
+          </div>
+          </sc-if>
+        </div>
+        <div style="height:100%;display:{{ assistantDisp }};flex-direction:column;background:#F0F8FA;">
+          <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid #D4E4F0;background:#fff;">
+            <button onClick="{{ goHome }}" style="width:36px;height:36px;border-radius:11px;background:#EEF3FA;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1E3A5F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:block;"><path d="M20 12H4"></path><path d="M10 6l-6 6 6 6"></path></svg></button>
+            <div style="flex:1;text-align:center;"><div style="font-size:16px;font-weight:700;color:#2E6DA4;">Assistant Tirely</div><div style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:#4CAF82;font-weight:600;margin-top:1px;"><span style="width:6px;height:6px;border-radius:50%;background:#4CAF82;"></span>Toujours de ton côté</div></div>
+            <div style="width:36px;flex-shrink:0;"></div>
+          </div>
+          <div class="tir-scroll" style="flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px;">
+            <div style="text-align:center;"><span style="font-size:11px;color:#6B7A8D;background:#EEF3FA;padding:4px 12px;border-radius:12px;">IA · Mistral AI</span></div>
+            <div style="display:flex;align-items:flex-end;gap:8px;">
+              <div style="width:34px;height:34px;border-radius:50%;background:rgba(77,190,219,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2E6DA4" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.6 4.4L18 9l-4.4 1.6L12 15l-1.6-4.4L6 9l4.4-1.6Z"></path></svg></div>
+              <div style="max-width:80%;padding:12px 15px;border-radius:4px 16px 16px 16px;background:#E7F3F7;color:#1E3A5F;font-size:13.5px;line-height:1.5;">{{ coachGreeting }}</div>
+            </div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;padding-left:42px;">
+              <sc-for list="{{ chips }}" as="c" hint-placeholder-count="3">
+                <button onClick="{{ c.send }}" style="background:#fff;color:#2E6DA4;border:1px solid #D4E4F0;border-radius:18px;padding:8px 13px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit;">{{ c.label }}</button>
+              </sc-for>
+            </div>
+            <sc-for list="{{ chatMsgs }}" as="m" hint-placeholder-count="0">
+              <div style="{{ m.rowStyle }}"><div style="{{ m.bubbleStyle }}">{{ m.text }}</div></div>
+            </sc-for>
+            <sc-if value="{{ chatTyping }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;align-items:flex-end;gap:8px;">
+                <div style="width:34px;height:34px;border-radius:50%;background:rgba(77,190,219,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2E6DA4" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.6 4.4L18 9l-4.4 1.6L12 15l-1.6-4.4L6 9l4.4-1.6Z"></path></svg></div>
+                <div style="padding:14px 16px;border-radius:4px 16px 16px 16px;background:#E7F3F7;display:flex;gap:4px;"><span style="width:7px;height:7px;border-radius:50%;background:#2E6DA4;animation:tirDot 1.2s infinite;"></span><span style="width:7px;height:7px;border-radius:50%;background:#2E6DA4;animation:tirDot 1.2s infinite 0.2s;"></span><span style="width:7px;height:7px;border-radius:50%;background:#2E6DA4;animation:tirDot 1.2s infinite 0.4s;"></span></div>
+              </div>
+            </sc-if>
+          </div>
+          <div style="padding:10px 14px 16px;display:flex;align-items:center;gap:10px;background:#fff;border-top:1px solid #D4E4F0;">
+            <input value="{{ chatInput }}" onChange="{{ onChatInput }}" onKeyDown="{{ onChatKey }}" placeholder="Pose ta question…" style="flex:1;background:#EEF3FA;border:1px solid #D4E4F0;border-radius:20px;padding:11px 16px;font-size:13px;font-family:inherit;color:#1E3A5F;outline:none;">
+            <button onClick="{{ sendChat }}" style="width:40px;height:40px;border-radius:50%;background:#1E3A5F;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l16-8-6 16-3-6z"></path></svg></button>
+          </div>
+        </div>
+
+        <!-- ============ PROFIL / PARAMÈTRES ============ -->
+        <div class="tir-scroll tir-scroll-show" style="height:100%;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:140px;display:{{ profileDisp }};flex-direction:column;">
+          <div style="display:flex;align-items:center;gap:12px;padding:14px 16px 20px;">
+            <button onClick="{{ goHome }}" style="width:36px;height:36px;border-radius:11px;background:#EEF3FA;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1E3A5F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:block;"><path d="M20 12H4"></path><path d="M10 6l-6 6 6 6"></path></svg></button>
+            <div style="font-size:18px;font-weight:700;">Profil &amp; paramètres</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;padding:0 20px 24px;">
+            <div style="width:60px;height:60px;border-radius:18px;background:linear-gradient(135deg,#2E6DA4,#4DBEDB);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:700;color:#fff;">{{ initial }}</div>
+            <div><div style="font-size:19px;font-weight:700;">{{ nameOrGuest }}</div><div style="font-size:12px;color:#6B7A8D;display:flex;align-items:center;gap:6px;margin-top:2px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6B7A8D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15a4 4 0 0 1 2.5-6.9A6 6 0 0 1 18 8"></path><path d="M3 3l18 18"></path></svg>Hors-ligne · données locales</div></div>
+          </div>
+
+          <div style="flex-shrink:0;margin:0 16px;background:linear-gradient(135deg,#1E3A5F,#2E6DA4);border-radius:20px;padding:18px;color:#fff;box-shadow:0 10px 24px rgba(30,58,95,0.2);position:relative;overflow:hidden;">
+            <div style="position:absolute;top:-30px;right:-20px;width:110px;height:110px;border-radius:50%;background:#4DBEDB;opacity:0.2;"></div>
+            <div style="display:flex;align-items:center;gap:9px;position:relative;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4DBEDB" stroke-width="1.5" stroke-linejoin="round"><path d="M4 8l4.5 3.5L12 5l3.5 6.5L20 8l-1.5 10h-13Z"></path></svg><span style="font-size:16px;font-weight:700;">Tirely Premium</span><span style="margin-left:auto;font-size:11px;font-weight:700;background:rgba(255,255,255,0.16);border-radius:999px;padding:4px 10px;">{{ premiumBadge }}</span></div>
+            <p style="margin:12px 0 14px;font-size:13.5px;line-height:1.5;color:#EAF3FA;position:relative;">Simulateur « what-if », objectifs d'épargne, export CSV et historique illimité.</p>
+            <div style="display:flex;align-items:flex-end;gap:8px;margin-bottom:14px;position:relative;"><span style="font-size:28px;font-weight:700;line-height:1;">2,40€</span><span style="font-size:13px;color:#EAF3FA;margin-bottom:4px;">/ mois · ou 19,99€ / an</span></div>
+            <button onClick="{{ togglePremium }}" style="width:100%;height:48px;border:none;border-radius:14px;background:#fff;color:#1E3A5F;font-size:15px;font-weight:700;cursor:pointer;position:relative;font-family:inherit;">{{ premiumCta }}</button>
+          </div>
+
+          <div style="font-size:12px;font-weight:700;color:#6B7A8D;letter-spacing:0.4px;text-transform:uppercase;padding:32px 20px 12px;">Compte</div>
+          <div style="flex-shrink:0;margin:0 16px;background:#fff;border:1px solid #D4E4F0;border-radius:16px;overflow:hidden;">
+            <div style="padding:15px;">
+              <label style="display:flex;align-items:center;gap:8px;font-size:12px;color:#6B7A8D;font-weight:600;margin-bottom:8px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2E6DA4" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"></circle><path d="M5 20a7 7 0 0 1 14 0"></path></svg>Prénom</label>
+              <input defaultValue="{{ name2 }}" onBlur="{{ onName }}" placeholder="Ton prénom" style="width:100%;background:#EEF3FA;border:1px solid #D4E4F0;border-radius:12px;padding:12px 14px;font-size:15px;font-weight:600;color:#1E3A5F;outline:none;font-family:inherit;">
+            </div>
+          </div>
+
+          <div style="font-size:12px;font-weight:700;color:#6B7A8D;letter-spacing:0.4px;text-transform:uppercase;padding:32px 20px 12px;">Devise</div>
+          <div style="flex-shrink:0;margin:0 16px;background:#fff;border:1px solid #D4E4F0;border-radius:16px;padding:15px;">
+            <div style="display:flex;align-items:center;gap:13px;position:relative;">
+              <span style="width:44px;height:44px;flex-shrink:0;border-radius:12px;background:#EEF3FA;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#2E6DA4;">{{ curSymDisplay }}</span>
+              <div style="flex:1;position:relative;">
+                <select value="{{ currency }}" onChange="{{ onCurrency }}" style="width:100%;-webkit-appearance:none;appearance:none;background:#EEF3FA;border:1px solid #D4E4F0;border-radius:12px;padding:13px 40px 13px 14px;font-size:15px;font-weight:600;color:#1E3A5F;outline:none;font-family:inherit;cursor:pointer;">
+                  <sc-for list="{{ currencyOptions }}" as="c" hint-placeholder-count="6">
+                    <option value="{{ c.code }}">{{ c.label }}</option>
+                  </sc-for>
+                </select>
+                <svg style="position:absolute;right:14px;top:50%;transform:translateY(-50%);pointer-events:none;" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B7A8D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
+              </div>
+            </div>
+            <div style="font-size:12px;color:#6B7A8D;margin-top:10px;">Appliquée partout : reste-à-vivre, historique, graphiques.</div>
+          </div>
+
+          <div style="font-size:12px;font-weight:700;color:#6B7A8D;letter-spacing:0.4px;text-transform:uppercase;padding:32px 20px 12px;">Confidentialité (RGPD)</div>
+          <div style="flex-shrink:0;margin:0 16px;background:#EEF3FA;border:1px solid #D4E4F0;border-radius:16px;padding:16px;display:flex;gap:12px;align-items:flex-start;">
+            <svg style="flex-shrink:0;margin-top:1px;" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4CAF82" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.2-2.9 7.6-7 8.6C7.9 18.6 5 15.2 5 11V6l7-3Z"></path></svg>
+            <div><div style="font-size:14px;font-weight:700;color:#1E3A5F;">Tes données t'appartiennent</div><div style="font-size:12.5px;line-height:1.45;color:#6B7A8D;margin-top:3px;">Tout est stocké sur ton téléphone. Aucune connexion bancaire. Exporte ou supprime tout, quand tu veux.</div></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:12px;margin:16px 16px 0;">
+            <button onClick="{{ triggerImport }}" style="width:100%;height:48px;border:1.5px solid #D4E4F0;border-radius:14px;background:#fff;color:#2E6DA4;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:8px;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#2E6DA4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3M8 7l4-4 4 4M4 15v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4"></path></svg>Importer (CSV)</button>
+            <button onClick="{{ exportCSV }}" style="width:100%;height:48px;border:1.5px solid #D4E4F0;border-radius:14px;background:#fff;color:#2E6DA4;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:8px;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#2E6DA4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M8 11l4 4 4-4M4 15v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4"></path></svg>Exporter (CSV)</button>
+            <button onClick="{{ wipeData }}" style="width:100%;height:48px;border:1.5px solid #D4E4F0;border-radius:14px;background:#fff;color:#F5A623;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:8px;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#F5A623" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2M6 7l1 13a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1l1-13"></path></svg>Effacer mes données</button>
+          </div>
+          <input id="csv-import" type="file" accept=".csv,text/csv" onChange="{{ onImport }}" style="display:none;">
+          <div style="text-align:center;font-size:11.5px;color:#6B7A8D;padding:28px 0 6px;">Tirely v1.0 · Fait avec soin, sans dark pattern.</div>
+        </div>
+
+      </div>
+      <!-- BOTTOM NAV -->
+      <div style="position:absolute;bottom:0;left:0;right:0;height:80px;background:#fff;border-top:1px solid #D4E4F0;display:{{ navDisp }};align-items:flex-start;padding:12px 0 0;z-index:20;box-shadow:0 -4px 16px rgba(30,58,95,0.05);">
+        <div onClick="{{ goHome }}" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;color:{{ navHome }};">
+          <svg width="137" height="137" viewBox="0 0 137 137" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 24px; height: 24px; stroke: {{ navHome }}">
+<path d="M70.1575 0.166061C69.6042 -0.0553535 68.719 -0.0553535 67.5018 0.166061H66.8379C66.174 0.276768 65.4548 0.664242 64.6802 1.32848C63.6843 2.21414 61.416 4.37293 57.8751 7.80485L40.2815 25.2412L10.0736 55.6303C5.53683 60.1693 2.71521 63.103 1.6087 64.4315C0.72348 65.4279 0.280884 66.2582 0.280884 66.9224L0.114899 67.4206C-0.217056 69.1919 0.170212 70.8525 1.27673 72.4024C2.38326 73.9523 3.82173 74.9487 5.59216 75.3915C5.92412 75.5022 7.47324 75.5576 10.2395 75.5576H13.7251L13.891 113.253C13.891 116.575 13.9464 118.844 14.057 120.062C14.1677 120.837 14.389 121.722 14.7209 122.719V123.051C15.9381 126.594 17.9575 129.583 20.7791 132.018C23.6007 134.454 26.8373 136.059 30.4888 136.834C30.9314 136.945 31.9273 137 33.4764 137H83.2697C94.7775 137 101.583 136.972 103.685 136.917C105.787 136.862 107.392 136.668 108.498 136.336L108.996 136.17C111.099 135.505 113.146 134.454 115.137 133.015C118.457 130.468 120.836 127.147 122.274 123.051V122.719C122.606 121.722 122.828 120.837 122.938 120.062C123.049 118.844 123.16 116.575 123.27 113.253V75.5576H126.922C129.577 75.5576 131.071 75.5022 131.403 75.3915C133.284 74.9487 134.75 73.9523 135.802 72.4024C136.853 70.8525 137.212 69.1919 136.88 67.4206V67.0885C136.77 66.4242 136.383 65.7046 135.719 64.9297C134.833 63.8226 132.62 61.4978 129.08 57.9552L77.2945 5.97818C74.6389 3.43192 72.9238 1.82667 72.1492 1.16242C71.4853 0.608889 70.8767 0.276768 70.3234 0.166061H70.1575ZM27.5012 66.9224C26.1734 64.4869 24.7349 62.8816 23.1858 62.1067L68.4977 16.7721L113.81 62.1067C112.26 62.8816 110.877 64.4869 109.66 66.9224V92.4958C109.66 109.434 109.55 118.124 109.328 118.567C108.554 120.671 107.281 122.055 105.511 122.719C104.515 123.162 102.634 123.383 99.8675 123.383H95.884V104.95C95.884 96.8687 95.884 91.4994 95.884 88.8424C95.7734 87.1818 95.6627 85.964 95.5521 85.1891L95.3861 85.023C94.5009 80.8162 92.5921 77.2735 89.6598 74.3951C86.7276 71.5168 83.1591 69.6901 78.9543 68.9152C78.1797 68.6937 74.6942 68.583 68.4977 68.583C62.3012 68.583 58.8157 68.6937 58.0411 68.9152C53.8363 69.6901 50.2955 71.5168 47.4185 74.3951C44.5416 77.2735 42.6052 80.8162 41.6093 85.023V85.1891C41.388 85.964 41.222 87.1818 41.1114 88.8424C41.1114 91.4994 41.1114 96.8687 41.1114 104.95V123.383H37.1279C34.3616 123.383 32.4805 123.162 31.4847 122.719C29.9355 122.165 28.7184 120.837 27.8332 118.733C27.6119 118.401 27.5012 116.851 27.5012 114.084V66.9224ZM76.4646 82.3661C77.9031 82.5875 79.1203 83.2517 80.1161 84.3588C80.6694 84.9123 81.278 85.9087 81.9419 87.3479L82.1079 105.448V123.383H54.8875V105.448L55.0535 87.3479C55.7174 85.9087 56.326 84.9123 56.8793 84.3588C57.8751 83.2517 59.2029 82.5875 60.8627 82.3661C61.416 82.2553 63.9886 82.2 68.5807 82.2C73.1727 82.2 75.8007 82.2553 76.4646 82.3661Z" fill="{{ navHome }}" stroke="#6B7A8D"></path>
+</svg>
+          <span style="font-size:10px;font-weight:600;">Accueil</span>
+        </div>
+        <div onClick="{{ goViz }}" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;color:{{ navViz }};">
+          <svg width="137" height="137" viewBox="0 0 137 137" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 24px; height: 24px; stroke: {{ navViz }}">
+<path d="M82.6022 0.149441C79.9076 -0.298882 77.241 0.261522 74.6025 1.83065C71.9641 3.39978 70.0834 5.52932 68.9607 8.21925C68.3993 9.45214 68.0905 10.8531 68.0344 12.4223C67.9782 13.9914 67.9502 18.8109 67.9502 26.8807V42.0116C69.1852 43.917 70.0554 45.0938 70.5606 45.5421C71.0658 45.9905 72.2167 46.5509 74.0131 47.2233C77.2691 48.3442 80.1883 50.0814 82.7706 52.4351C87.0371 56.3579 89.1704 61.4576 89.1704 67.7341C89.1704 73.5623 87.3739 78.4378 83.7811 82.3607C80.4128 85.9472 76.2025 88.1328 71.15 88.9174C66.0976 89.7019 61.4382 88.9174 57.1717 86.5637C52.4561 83.8737 49.1439 79.7828 47.2352 74.2908C46.6738 72.6096 46.1405 71.4888 45.6353 70.9284C45.13 70.368 43.9231 69.4153 42.0144 68.0704H11.1946C8.38768 69.0791 6.31056 70.1439 4.96326 71.2647C2.60545 73.058 1.0336 75.5237 0.247665 78.662C-0.313721 80.9036 0.0792389 84.266 1.42656 88.7493C2.88614 93.6808 5.18782 98.6684 8.33154 103.712C11.9244 109.652 16.247 114.92 21.2994 119.515C27.1378 124.783 33.6498 128.93 40.8355 131.956C49.1439 135.319 58.0699 137 67.6133 137C72.1044 137 74.9113 136.944 76.0341 136.832C86.2512 135.487 95.7104 132.124 104.412 126.745C113.113 121.365 120.215 114.472 125.716 106.066C131.555 97.2113 135.204 87.3482 136.663 76.4764C136.888 75.0194 137 72.1053 137 67.7341C137 62.1301 136.495 57.0864 135.484 52.6032C133.8 44.6455 130.488 36.9119 125.548 29.4025C122.18 24.471 118.306 19.9877 113.927 15.9528C107.752 10.4609 100.903 6.25784 93.3807 3.34374C91.5843 2.55918 89.6475 1.88669 87.5704 1.32629C85.4933 0.765885 83.8372 0.373602 82.6022 0.149441ZM48.9194 2.50314C47.9089 2.27897 46.9826 2.22293 46.1405 2.33502C45.2985 2.4471 43.9231 2.89542 42.0144 3.67998C33.2569 7.15449 25.6221 12.1421 19.1101 18.6428C14.0576 23.5743 9.90341 29.1223 6.6474 35.2867C4.40189 39.4337 2.88614 43.0764 2.10022 46.2146C1.76338 48.12 2.12828 49.8292 3.1949 51.3423C4.26154 52.8554 5.74919 53.7801 7.65788 54.1163C8.10699 54.2284 14.0015 54.2844 25.3414 54.2844H39.3198C41.1162 54.1724 42.1828 54.0603 42.5196 53.9482C43.1933 53.6119 45.1581 51.8747 48.4141 48.7364C51.6701 45.5982 53.4666 43.5247 53.8034 42.516C53.9157 42.2918 54.0279 41.2831 54.1402 39.4898V25.3676C54.1402 14.0475 54.0841 8.21925 53.9718 7.88301C53.7472 6.53804 53.1578 5.38921 52.2034 4.43653C51.2491 3.48384 50.1544 2.83938 48.9194 2.50314ZM82.097 14.2716C83.6688 14.2716 86.0266 15.0001 89.1704 16.4572C93.1 18.2505 96.8613 20.5481 100.454 23.3502C105.057 26.8247 109.043 30.7475 112.412 35.1186C116.341 40.2743 119.204 45.8784 121.001 51.9307C123.134 58.9918 123.808 66.4452 123.022 74.2908C121.562 85.4989 117.296 95.2499 110.222 103.544C103.598 111.39 95.4017 116.966 85.6337 120.272C75.8656 123.578 66.0415 124.223 56.1612 122.205C45.6072 119.964 36.3444 114.92 28.3728 107.074C24.8923 103.6 21.917 99.6771 19.4469 95.306C17.6505 92.2798 16.247 89.1976 15.2365 86.0593C14.4506 83.9298 14.0576 82.5848 14.0576 82.0244C14.0576 81.9123 17.5943 81.8563 24.6677 81.8563L35.1094 82.0244L36.1199 83.8737C39.4882 90.7107 44.5967 95.8103 51.4456 99.1728C58.0699 102.535 65.031 103.768 72.3289 102.871C79.9637 101.975 86.588 98.8365 92.2018 93.4566C97.9279 87.9647 101.408 81.2959 102.644 73.4502C103.879 66.0529 102.868 58.9918 99.612 52.267C96.1315 45.2059 90.7984 39.8821 83.6127 36.2955L81.9286 35.2867L81.7601 24.8632V15.7847C81.8724 14.776 81.9847 14.2716 82.097 14.2716ZM40.1618 28.5619V37.3042L38.6461 38.8173L36.962 40.3304H28.3728L19.7837 40.1623L20.9626 38.481C22.5345 36.0153 24.4993 33.4374 26.8571 30.7475C31.2359 25.8159 35.6708 22.2293 40.1618 19.9877V28.5619Z" fill="{{ navViz }}" stroke="#6B7A8D"></path>
+</svg>
+          <span style="font-size:10px;font-weight:600;">Dépenses</span>
+        </div>
+        <div style="width:70px;display:flex;justify-content:center;">
+          <div onClick="{{ openTx }}" style="width:54px;height:54px;border-radius:50%;background:#4DBEDB;display:flex;align-items:center;justify-content:center;margin-top:-22px;cursor:pointer;box-shadow:0 6px 16px rgba(77,190,219,0.5);border:4px solid #fff;">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="display:block;"><path d="M12 5v14M5 12h14"></path></svg>
+          </div>
+        </div>
+        <div onClick="{{ goCharges }}" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;color:{{ navCharges }};">
+          <svg width="137" height="152" viewBox="0 0 137 152" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 24px; height: 24px; stroke: {{ navCharges }}">
+<path d="M37.4811 4.42539C36.2502 2.2127 34.5577 0.829761 32.4036 0.276587C30.2495 -0.276587 28.1878 0 26.2183 1.10635L11.2628 15.8577C7.07771 20.0372 4.43127 22.6801 3.32346 23.7865C1.84637 25.5075 0.953949 26.6753 0.646225 27.2899C0.338501 27.9046 0.184647 28.7036 0.184647 29.687V32.0841C0.307724 32.4529 0.461594 32.9139 0.646225 33.467C0.830856 34.0202 1.354 34.7271 2.21564 35.5875L23.8181 57.3457C25.4182 58.6979 26.4953 59.5584 27.0492 59.9272C27.6031 60.296 28.2493 60.5419 28.9879 60.6648H29.1725C30.8958 60.9106 32.5267 60.634 34.0654 59.835C35.604 59.036 36.7426 57.8374 37.4811 56.2394C37.7273 55.7477 37.8504 55.0716 37.8504 54.2111V52.9203C37.8504 51.814 37.7581 50.9842 37.5734 50.4311C37.3888 49.8779 36.8041 49.1096 35.8194 48.1262C35.204 47.3886 33.7269 45.852 31.3881 43.5164L26.0337 37.9846H67.7615L109.489 38.169C112.074 38.9066 114.105 39.8286 115.582 40.9349C118.536 42.9017 120.444 45.7291 121.306 49.4169C121.552 50.1545 121.675 51.1994 121.675 52.5516L121.86 63.615V78.182C123.214 80.1488 124.322 81.501 125.183 82.2386C126.783 83.4679 128.63 83.8981 130.722 83.5293C132.446 83.1605 133.861 82.3615 134.969 81.1322C135.584 80.3947 136.2 79.2883 136.815 77.8132L137 64.7214C137 57.0999 136.938 52.2442 136.815 50.1545C136.692 48.0647 136.2 45.852 135.338 43.5164C133.492 37.4929 129.922 32.5758 124.629 28.7651C119.952 25.2002 114.905 23.2333 109.489 22.8645C108.628 22.7416 94.4106 22.6801 66.8383 22.6801H26.0337L31.3881 17.1484C33.7269 14.8128 35.204 13.2762 35.8194 12.5386C36.8041 11.5552 37.3888 10.7869 37.5734 10.2337C37.7581 9.68055 37.8504 8.85079 37.8504 7.74444V6.26931C37.8504 5.53174 37.7273 4.91711 37.4811 4.42539ZM9.41644 68.5936C10.7704 68.9624 11.9398 69.6385 12.9245 70.6219C13.54 71.2366 14.2785 72.2814 15.1402 73.7566V88.1391L15.3248 99.2026C15.3248 100.555 15.4479 101.6 15.6941 102.337C16.5557 105.779 18.2174 108.484 20.6792 110.45C22.4025 111.803 24.6797 112.909 27.5108 113.77L69.2385 113.954H110.966L105.612 108.422C103.273 106.087 101.796 104.55 101.181 103.812C100.196 102.829 99.6112 102.061 99.4265 101.507C99.2419 100.954 99.1496 100.125 99.1496 99.0182V98.8338C99.1496 96.4982 99.8266 94.6543 101.181 93.3021C102.288 92.3186 103.642 91.704 105.243 91.4582C106.35 91.2123 107.212 91.1508 107.827 91.2738H108.012C108.751 91.3967 109.428 91.6425 110.043 92.0113C110.659 92.3801 111.705 93.2406 113.182 94.5928L134.969 116.351C135.708 117.211 136.2 117.918 136.446 118.472C136.692 119.025 136.815 119.424 136.815 119.67V121.514V123.542C136.815 123.788 136.692 124.188 136.446 124.741C136.2 125.294 135.708 126.001 134.969 126.861L113.182 148.62C111.705 149.972 110.659 150.832 110.043 151.201C109.428 151.57 108.751 151.816 108.012 151.939H107.827C107.212 152.061 106.35 152 105.243 151.754C103.642 151.508 102.288 150.894 101.181 149.91C99.8266 148.558 99.1496 146.714 99.1496 144.378V144.194C99.1496 143.088 99.2419 142.258 99.4265 141.705C99.6112 141.152 100.196 140.383 101.181 139.4C101.796 138.662 103.273 137.126 105.612 134.79L110.966 129.258H70.1617C42.5894 129.258 28.3724 129.197 27.5108 129.074C20.3715 128.336 14.217 125.448 9.04717 120.408C3.87737 115.368 0.923187 109.283 0.184647 102.153C0.061554 101.415 0 96.4367 0 87.2172L0.184647 74.1254C0.923187 72.4044 1.84636 71.0522 2.95418 70.0687C4.80054 68.4707 6.95464 67.979 9.41644 68.5936Z" fill="{{ navCharges }}"></path>
+</svg>
+          <span style="font-size:10px;font-weight:600;">Charges</span>
+        </div>
+        <div onClick="{{ goBilan }}" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;color:{{ navBilan }};">
+          <svg width="137" height="171" viewBox="0 0 137 171" fill="none" xmlns="http://www.w3.org/2000/svg" style="stroke: {{ navBilan }}; width: 24px; height: 24px">
+<path d="M101.089 16.9964C100.813 15.4764 100.052 13.7491 98.8061 11.8145C97.0071 9.05091 94.7929 6.70182 92.1636 4.76727C88.704 2.41818 84.6909 0.898182 80.1242 0.207273C79.7091 0.0690909 75.5576 0 67.6697 0C62.2727 0 58.7439 0.0690909 57.0833 0.207273C55.8379 0.345455 54.3157 0.690909 52.5167 1.24364L51.6864 1.45091C49.1954 2.28 46.7737 3.59273 44.4212 5.38909C40.2697 8.42909 37.4328 12.2982 35.9106 16.9964H29.4758C25.601 16.9964 22.8333 17.1345 21.1727 17.4109C16.4677 18.24 12.3162 20.2782 8.71819 23.5255C5.12021 26.7727 2.56009 30.6073 1.03787 35.0291L0.830307 35.8582C0.415146 36.9636 0.207565 38.3455 0.207565 40.0036C0.0691833 42.3527 0 47.3964 0 55.1345V140.324C0 145.713 0.0691833 148.891 0.207565 149.858C1.03787 153.451 2.49091 156.836 4.56667 160.015C8.44141 165.542 13.7 169.065 20.3424 170.585L22.4182 171H112.714C114.513 171 115.689 170.931 116.242 170.793C120.256 169.825 123.923 168.098 127.244 165.611C132.364 161.742 135.547 156.491 136.792 149.858C136.931 148.891 137 145.713 137 140.324V48.2945C137 42.4909 136.931 39.1745 136.792 38.3455C135.685 32.9564 133.264 28.3964 129.527 24.6655C125.791 20.9345 121.224 18.5164 115.827 17.4109C114.167 17.1345 111.399 16.9964 107.524 16.9964H101.089ZM68.5 17.2036C74.0354 17.2036 77.3566 17.2727 78.4636 17.4109C79.5707 17.5491 80.747 18.0327 81.9924 18.8618C83.9298 20.2436 85.0715 22.0055 85.4174 24.1473C85.7634 26.2891 85.3482 28.2927 84.172 30.1582C82.9957 32.0236 81.3005 33.2327 79.0864 33.7855C78.1177 34.0618 74.5889 34.2 68.5 34.2C62.4111 34.2 58.9515 34.0618 58.1212 33.7855C55.3535 33.2327 53.4508 31.7818 52.4129 29.4327C51.375 27.0836 51.3058 24.7345 52.2053 22.3855C53.1048 20.0364 54.8692 18.4473 57.4985 17.6182C58.052 17.48 58.8131 17.3418 59.7818 17.2036H68.5ZM17.2288 40.8327C18.4742 38.6218 19.4429 37.1709 20.1348 36.48C20.9651 35.5127 22.003 34.8909 23.2485 34.6145C24.4939 34.3382 26.6389 34.2 29.6833 34.2H35.703C37.2253 38.0691 39.301 41.3855 41.9303 44.1491C45.6667 47.7418 50.2333 50.0909 55.6303 51.1964C56.3222 51.3345 58.3288 51.4036 61.65 51.4036H75.35C78.6712 51.4036 80.6778 51.3345 81.3697 51.1964C84.8293 50.5055 88.0813 49.1927 91.1258 47.2582C95.6924 44.08 99.0828 39.7273 101.297 34.2H106.694C108.078 34.2 109.946 34.2691 112.298 34.4073H113.129C114.789 34.8218 116.208 35.6509 117.384 36.8945C118.56 38.1382 119.356 39.5891 119.771 41.2473C119.91 41.8 119.979 59.4873 119.979 94.3091L119.771 131.825C119.771 139.287 119.702 144.055 119.564 146.127C119.425 147.647 119.218 148.684 118.941 149.236L118.733 149.651C118.041 150.756 117.142 151.655 116.035 152.345C115.481 152.76 114.582 153.244 113.336 153.796H23.6636C22.1414 153.105 20.9651 152.415 20.1348 151.724C18.751 150.48 17.8515 148.96 17.4364 147.164C17.298 146.611 17.2288 128.716 17.2288 93.48V40.8327ZM102.542 83.9455C101.989 81.0436 100.467 79.04 97.9758 77.9345C95.4848 76.8291 92.9593 76.8291 90.3992 77.9345C87.8391 79.04 86.2823 81.0436 85.7288 83.9455C85.5904 84.4982 85.5212 92.2364 85.5212 107.16V126.229C85.6596 128.44 85.798 129.891 85.9364 130.582C86.0747 131.273 86.3515 131.964 86.7667 132.655V132.862C87.1818 133.415 87.8045 134.105 88.6348 134.935C90.2955 136.178 92.1636 136.8 94.2394 136.8C96.3152 136.8 98.1141 136.178 99.6364 134.935C100.605 134.105 101.228 133.415 101.505 132.862L101.712 132.655C102.127 131.964 102.404 131.273 102.542 130.582C102.681 129.891 102.75 128.44 102.75 126.229V107.16C102.75 92.0982 102.681 84.36 102.542 83.9455ZM51.0636 100.735C50.3717 97.9709 48.8149 96.0364 46.3932 94.9309C43.9715 93.8254 41.5497 93.7909 39.128 94.8273C36.7063 95.8636 35.1495 97.8327 34.4576 100.735C34.1808 101.702 34.077 106.676 34.1462 115.658C34.2154 124.64 34.3884 129.615 34.6652 130.582C35.0803 132.102 35.9106 133.484 37.1561 134.727C38.8167 136.109 40.7194 136.8 42.8644 136.8C45.0093 136.8 46.8429 136.109 48.3652 134.727C49.749 133.484 50.6485 132.102 51.0636 130.582C51.202 129.615 51.2712 124.64 51.2712 115.658C51.2712 106.676 51.202 101.702 51.0636 100.735ZM70.5758 111.513C71.5444 111.651 72.5477 112.1 73.5856 112.86C74.6235 113.62 75.4192 114.449 75.9727 115.347C76.5263 116.245 76.8722 117.178 77.0106 118.145C77.149 119.113 77.2182 121.116 77.2182 124.156C77.2182 128.025 77.0106 130.582 76.5955 131.825C75.9035 133.484 74.3813 134.935 72.0288 136.178H71.6136C71.0601 136.455 70.6104 136.627 70.2644 136.696C69.9184 136.765 69.3303 136.8 68.5 136.8C66.4242 136.8 64.5561 136.109 62.8955 134.727C61.5116 133.484 60.6121 132.102 60.197 130.582C60.0586 129.615 59.9894 127.438 59.9894 124.053C59.9894 120.667 60.0586 118.491 60.197 117.524C60.7505 115.589 61.9268 114 63.7258 112.756C65.248 111.789 66.701 111.305 68.0848 111.305C69.4687 111.305 70.299 111.375 70.5758 111.513Z" fill="{{ navBilan }}"></path>
+</svg>
+          <span style="font-size:10px;font-weight:600;">Bilan</span>
+        </div>
+      </div>
+
+      <!-- MODAL: TRANSACTION -->
+      <div style="position:absolute;inset:0;background:rgba(13,27,42,0.45);display:{{ txModalDisp }};align-items:flex-end;z-index:40;">
+        <div style="background:#fff;border-radius:26px 26px 0 0;padding:20px 20px 24px;width:100%;box-shadow:0 -8px 30px rgba(30,58,95,0.2);">
+          <div style="width:38px;height:4px;background:#D4E4F0;border-radius:2px;margin:0 auto 16px;"></div>
+          <div style="font-size:17px;font-weight:700;margin-bottom:16px;">Ajouter une transaction</div>
+          <div style="margin-bottom:14px;"><label style="font-size:12px;color:#6B7A8D;font-weight:600;margin-bottom:6px;display:block;">Description</label><input id="tx-desc" placeholder="Ex : Courses" style="width:100%;background:#EEF3FA;border:1px solid #D4E4F0;border-radius:12px;padding:12px 14px;font-size:14px;color:#1E3A5F;outline:none;font-family:inherit;"></div>
+          <div style="margin-bottom:14px;"><label style="font-size:12px;color:#6B7A8D;font-weight:600;margin-bottom:6px;display:block;">Montant</label><input id="tx-amount" type="number" inputmode="decimal" placeholder="0" style="width:100%;background:#EEF3FA;border:1px solid #D4E4F0;border-radius:12px;padding:12px 14px;font-size:14px;color:#1E3A5F;outline:none;font-family:inherit;"></div>
+          <div style="margin-bottom:14px;"><label style="font-size:12px;color:#6B7A8D;font-weight:600;margin-bottom:6px;display:block;">Date</label><input id="tx-date" type="date" style="width:100%;background:#EEF3FA;border:1px solid #D4E4F0;border-radius:12px;padding:12px 14px;font-size:14px;color:#1E3A5F;outline:none;font-family:inherit;"></div>
+          <div style="margin-bottom:14px;"><label style="font-size:12px;color:#6B7A8D;font-weight:600;margin-bottom:8px;display:block;">Type</label><div style="display:flex;gap:8px;"><div onClick="{{ setDepense }}" style="{{ typeDepenseStyle }}">Dépense</div><div onClick="{{ setRevenu }}" style="{{ typeRevenuStyle }}">Revenu</div></div></div>
+          <div style="margin-bottom:18px;"><label style="font-size:12px;color:#6B7A8D;font-weight:600;margin-bottom:8px;display:block;">Catégorie</label><div style="display:flex;gap:8px;flex-wrap:wrap;"><sc-for list="{{ txCats }}" as="c" hint-placeholder-count="8"><div onClick="{{ c.select }}" style="{{ c.style }}">{{ c.label }}</div></sc-for></div></div>
+          <button onClick="{{ saveTx }}" style="width:100%;background:#4DBEDB;border:none;border-radius:14px;padding:14px;font-size:15px;font-weight:700;color:#fff;cursor:pointer;font-family:inherit;">Enregistrer</button>
+          <button onClick="{{ closeTx }}" style="width:100%;background:transparent;border:none;padding:12px;font-size:14px;color:#4DBEDB;cursor:pointer;font-family:inherit;font-weight:600;">Annuler</button>
+        </div>
+      </div>
+
+      <!-- MODAL: CHARGE -->
+      <div style="position:absolute;inset:0;background:rgba(13,27,42,0.45);display:{{ chargeModalDisp }};align-items:flex-end;z-index:40;">
+        <div style="background:#fff;border-radius:26px 26px 0 0;padding:20px 20px 24px;width:100%;box-shadow:0 -8px 30px rgba(30,58,95,0.2);">
+          <div style="width:38px;height:4px;background:#D4E4F0;border-radius:2px;margin:0 auto 16px;"></div>
+          <div style="font-size:17px;font-weight:700;margin-bottom:16px;">{{ chargeTitle }}</div>
+          <div style="margin-bottom:14px;"><label style="font-size:12px;color:#6B7A8D;font-weight:600;margin-bottom:6px;display:block;">Nom de la charge</label><input id="chg-name" placeholder="Ex : Loyer" style="width:100%;background:#EEF3FA;border:1px solid #D4E4F0;border-radius:12px;padding:12px 14px;font-size:14px;color:#1E3A5F;outline:none;font-family:inherit;"></div>
+          <div style="margin-bottom:14px;"><label style="font-size:12px;color:#6B7A8D;font-weight:600;margin-bottom:6px;display:block;">Montant mensuel</label><input id="chg-amount" type="number" inputmode="decimal" placeholder="0" style="width:100%;background:#EEF3FA;border:1px solid #D4E4F0;border-radius:12px;padding:12px 14px;font-size:14px;color:#1E3A5F;outline:none;font-family:inherit;"></div>
+          <div style="margin-bottom:14px;"><label style="font-size:12px;color:#6B7A8D;font-weight:600;margin-bottom:8px;display:block;">Catégorie</label><div style="display:flex;gap:8px;flex-wrap:wrap;"><sc-for list="{{ chargeCats }}" as="c" hint-placeholder-count="8"><div onClick="{{ c.select }}" style="{{ c.style }}">{{ c.label }}</div></sc-for></div></div>
+          <div style="margin-bottom:18px;"><label style="font-size:12px;color:#6B7A8D;font-weight:600;margin-bottom:6px;display:block;">Jour de prélèvement</label><input id="chg-day" type="number" inputmode="numeric" placeholder="5" style="width:100%;background:#EEF3FA;border:1px solid #D4E4F0;border-radius:12px;padding:12px 14px;font-size:14px;color:#1E3A5F;outline:none;font-family:inherit;"></div>
+          <sc-if value="{{ chargeCanDelete }}" hint-placeholder-val="{{ false }}"><button onClick="{{ deleteCharge }}" style="width:100%;background:rgba(245,166,35,0.12);border:none;border-radius:14px;padding:13px;font-size:14px;font-weight:700;color:#F5A623;cursor:pointer;font-family:inherit;margin-bottom:10px;">Supprimer cette charge</button></sc-if>
+          <button onClick="{{ saveCharge }}" style="width:100%;background:#4DBEDB;border:none;border-radius:14px;padding:14px;font-size:15px;font-weight:700;color:#fff;cursor:pointer;font-family:inherit;">Enregistrer</button>
+          <button onClick="{{ closeCharge }}" style="width:100%;background:transparent;border:none;padding:12px;font-size:14px;color:#4DBEDB;cursor:pointer;font-family:inherit;font-weight:600;">Annuler</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  constructor(props){
+    super(props);
+    this.CATS = {
+      Alimentation:'#4DBEDB', Transport:'#4CAF82', Logement:'#E8695B', Loisirs:'#F5A623',
+      'Santé':'#2E6DA4', Abonnements:'#1E3A5F', 'Vêtements':'#7FB2D4', Divers:'#6B7A8D', Revenu:'#4CAF82'
+    };
+    this.ICONS = {
+      Alimentation:['M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8Z','M9 8 12 3l3 5'],
+      Transport:['M4 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1Z','M4 11h16','M8 16h.01','M16 16h.01'],
+      Logement:['M4 10 12 4l8 6','M6 10v9h12v-9'],
+      Loisirs:['M4 8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2 2 2 0 0 0 0 4 2 2 0 0 1-2 2H6a2 2 0 0 1-2-2 2 2 0 0 0 0-4Z','M14 6v12'],
+      'Santé':['M10 4h4v6h6v4h-6v6h-4v-6H4v-4h6z'],
+      Abonnements:['M4 9a7 7 0 0 1 12-4l2 2','M18 4v3h-3','M20 15a7 7 0 0 1-12 4l-2-2','M4 20v-3h3'],
+      'Vêtements':['M8.5 4 5 6 3 9.5l3 1.8V20h12v-8.7l3-1.8L19 6l-3.5-2a3.5 3.5 0 0 1-7 0Z'],
+      Divers:['M5 5h6v6H5zM13 5h6v6h-6zM5 13h6v6H5zM13 13h6v6h-6z'],
+      Revenu:['M12 20V5','M6 11l6-6 6 6']
+    };
+    const d = this.load() || {};
+    this.CURRENCIES = [
+      {code:'EUR',sym:'\u20AC',name:'Euro'},
+      {code:'USD',sym:'$',name:'Dollar US'},
+      {code:'GBP',sym:'\u00A3',name:'Livre sterling'},
+      {code:'CHF',sym:'CHF',name:'Franc suisse'},
+      {code:'DZD',sym:'DA',name:'Dinar alg\u00e9rien'},
+      {code:'MAD',sym:'DH',name:'Dirham marocain'},
+      {code:'TND',sym:'DT',name:'Dinar tunisien'},
+      {code:'RUB',sym:'\u20BD',name:'Rouble'},
+      {code:'CAD',sym:'$CA',name:'Dollar canadien'},
+      {code:'JPY',sym:'\u00A5',name:'Yen'},
+      {code:'CNY',sym:'\u5143',name:'Yuan'},
+      {code:'XOF',sym:'CFA',name:'Franc CFA'}
+    ];
+    let curr = d.currency || 'EUR';
+    const symMap = {'\u20AC':'EUR','$':'USD','\u00A3':'GBP','CHF':'CHF'};
+    if (symMap[curr]) curr = symMap[curr];
+    this.state = {
+      screen:'home',
+      name: d.name || '',
+      income: d.income || 0,
+      currency: curr,
+      transactions: d.transactions || [],
+      charges: d.charges || [],
+      notif: d.notif || { oubli:true, seuil:true, resume:false },
+      premium: !!d.premium,
+      txModal:false, chargeModal:false,
+      txType:'depense', txCat:'Alimentation',
+      chargeCat:'Logement', editChargeId:null,
+      month:0,
+      bilanTab:'mois', yearOff:0,
+      chatMsgs:[], chatTyping:false, chatInput:''
+    };
+  }
+
+  load(){ try{ const r = localStorage.getItem('tirely_data'); if(r) return JSON.parse(r); }catch(e){} return null; }
+  save(){ try{ const s=this.state; localStorage.setItem('tirely_data', JSON.stringify({name:s.name,income:s.income,currency:s.currency,transactions:s.transactions,charges:s.charges,notif:s.notif,premium:s.premium})); }catch(e){} }
+  componentDidUpdate(){ this.save(); }
+
+  curSym(){ const c=(this.CURRENCIES||[]).find(x=>x.code===this.state.currency); return c?c.sym:(this.state.currency||'\u20AC'); }
+  fmt(n){ const neg=n<0; const v=Math.round(Math.abs(n)).toLocaleString('fr-FR').replace(/\u202f/g,'\u2009'); return (neg?'- ':'')+v+'\u00A0'+this.curSym(); }
+  fmtSigned(n,type){ const v=Math.round(Math.abs(n)).toLocaleString('fr-FR').replace(/\u202f/g,'\u2009'); return (type==='revenu'?'+ ':'- ')+v+'\u00A0'+this.curSym(); }
+
+  iconEl(cat,color,size){ size=size||22; const ds=this.ICONS[cat]||this.ICONS.Divers;
+    return React.createElement('svg',{width:size,height:size,viewBox:'0 0 24 24',fill:'none',stroke:color,strokeWidth:1.6,strokeLinecap:'round',strokeLinejoin:'round'},ds.map((dd,i)=>React.createElement('path',{key:i,d:dd}))); }
+  tint(hex){ return hex+'22'; }
+  sameYear(iso,y){ return new Date(iso).getFullYear()===y; }
+  monthDate(off){ const n=new Date(); return new Date(n.getFullYear(), n.getMonth()-off, 1); }
+  sameMonth(iso,dobj){ const dt=new Date(iso); return dt.getFullYear()===dobj.getFullYear() && dt.getMonth()===dobj.getMonth(); }
+  dateLabel(iso){ const dt=new Date(iso); const now=new Date(); const day=86400000;
+    const a=new Date(dt.getFullYear(),dt.getMonth(),dt.getDate()); const b=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+    const diff=Math.round((b-a)/day); if(diff===0) return "Aujourd'hui"; if(diff===1) return 'Hier';
+    const m=['janv.','f\u00e9vr.','mars','avr.','mai','juin','juil.','ao\u00fbt','sept.','oct.','nov.','d\u00e9c.']; return dt.getDate()+' '+m[dt.getMonth()]; }
+  monthName(dobj){ const m=['Janvier','F\u00e9vrier','Mars','Avril','Mai','Juin','Juillet','Ao\u00fbt','Septembre','Octobre','Novembre','D\u00e9cembre']; return m[dobj.getMonth()]+' '+dobj.getFullYear(); }
+  monthShort(dobj){ const m=['jan','f\u00e9v','mar','avr','mai','jun','jul','ao\u00fb','sep','oct','nov','d\u00e9c']; return m[dobj.getMonth()]; }
+
+  catTotals(dobj){ const t={}; this.state.charges.forEach(c=>{ t[c.category]=(t[c.category]||0)+c.amount; });
+    this.state.transactions.filter(x=>x.type==='depense'&&this.sameMonth(x.date,dobj)).forEach(x=>{ t[x.category]=(t[x.category]||0)+x.amount; }); return t; }
+
+  go(screen){ this.setState({screen}); }
+  pill(sel){ const b='padding:9px 14px;border-radius:20px;font-size:12.5px;font-weight:600;cursor:pointer;border-width:1px;border-style:solid;transition:all 0.15s;';
+    return sel? b+'background:rgba(77,190,219,0.14);color:#2E6DA4;border-color:#4DBEDB;' : b+'background:transparent;color:#6B7A8D;border-color:#D4E4F0;'; }
+
+  openTxAdd(){ this.setState({txModal:true, txType:'depense', txCat:'Alimentation'});
+    setTimeout(()=>{ const a=document.getElementById('tx-desc'), b=document.getElementById('tx-amount'), t=document.getElementById('tx-date'); if(a)a.value=''; if(b)b.value=''; if(t){ const n=new Date(); t.value=n.getFullYear()+'-'+String(n.getMonth()+1).padStart(2,'0')+'-'+String(n.getDate()).padStart(2,'0'); } },30); }
+  openTxBilan(){ this.setState({txModal:true, txType:'depense', txCat:'Alimentation'}); const bm=this.monthDate(this.state.month);
+    setTimeout(()=>{ const a=document.getElementById('tx-desc'), b=document.getElementById('tx-amount'), t=document.getElementById('tx-date'); if(a)a.value=''; if(b)b.value='';
+      if(t){ const now=new Date(); const same=bm.getFullYear()===now.getFullYear()&&bm.getMonth()===now.getMonth(); const dd=same?now.getDate():15; t.value=bm.getFullYear()+'-'+String(bm.getMonth()+1).padStart(2,'0')+'-'+String(dd).padStart(2,'0'); } },30); }
+  saveTx(){ const de=document.getElementById('tx-desc'), ae=document.getElementById('tx-amount');
+    const amt=ae?parseFloat(String(ae.value).replace(',','.')):NaN; if(isNaN(amt)||amt<=0){ this.setState({txModal:false}); return; }
+    const cat=this.state.txType==='revenu'?'Revenu':this.state.txCat;
+    const label=(de&&de.value.trim())?de.value.trim():(this.state.txType==='revenu'?'Revenu':cat);
+    const dEl=document.getElementById('tx-date'); let dateIso;
+    if(dEl&&dEl.value){ const d=new Date(dEl.value+'T12:00:00'); dateIso=isNaN(d)?new Date().toISOString():d.toISOString(); } else dateIso=new Date().toISOString();
+    const tx={id:'t'+Date.now(),label,amount:amt,type:this.state.txType,category:cat,date:dateIso};
+    this.setState(s=>({transactions:[tx,...s.transactions],txModal:false,screen:'home'})); }
+
+  openChargeAdd(){ this.setState({chargeModal:true,editChargeId:null,chargeCat:'Logement'});
+    setTimeout(()=>{ ['chg-name','chg-amount','chg-day'].forEach(id=>{const el=document.getElementById(id); if(el)el.value='';}); },30); }
+  openChargeEdit(c){ this.setState({chargeModal:true,editChargeId:c.id,chargeCat:c.category});
+    setTimeout(()=>{ const n=document.getElementById('chg-name'),a=document.getElementById('chg-amount'),d=document.getElementById('chg-day');
+      if(n)n.value=c.label; if(a)a.value=c.amount; if(d)d.value=c.day||''; },30); }
+  saveCharge(){ const n=document.getElementById('chg-name'),a=document.getElementById('chg-amount'),d=document.getElementById('chg-day');
+    const amt=a?parseFloat(String(a.value).replace(',','.')):NaN; if(isNaN(amt)||amt<=0){ this.setState({chargeModal:false}); return; }
+    const label=(n&&n.value.trim())?n.value.trim():this.state.chargeCat; const day=d&&d.value?parseInt(d.value,10):null;
+    if(this.state.editChargeId){ this.setState(s=>({charges:s.charges.map(c=>c.id===s.editChargeId?{...c,label,amount:amt,category:s.chargeCat,day}:c),chargeModal:false})); }
+    else { const ch={id:'c'+Date.now(),label,amount:amt,category:this.state.chargeCat,day}; this.setState(s=>({charges:[...s.charges,ch],chargeModal:false})); } }
+  deleteCharge(){ const id=this.state.editChargeId; if(!id) return; this.setState(s=>({charges:s.charges.filter(c=>c.id!==id),chargeModal:false})); }
+  deleteChargeById(id){ if(!id) return; this.setState(s=>({charges:s.charges.filter(c=>c.id!==id)})); }
+  triggerImport(){ const el=document.getElementById('csv-import'); if(el) el.click(); }
+  onImport(e){ const file=e.target.files&&e.target.files[0]; if(!file) return; const reader=new FileReader();
+    reader.onload=(ev)=>{ try{ const lines=String(ev.target.result).split(/\r?\n/).filter(l=>l.trim());
+      const parse=(line)=>{ const out=[]; let cur='',q=false; for(let i=0;i<line.length;i++){ const ch=line[i]; if(q){ if(ch==='"'){ if(line[i+1]==='"'){cur+='"';i++;} else q=false; } else cur+=ch; } else { if(ch==='"')q=true; else if(ch===';'||ch===','){out.push(cur);cur='';} else cur+=ch; } } out.push(cur); return out; };
+      let start=0; if(lines.length){ const h=parse(lines[0]).join(' ').toLowerCase(); if(h.indexOf('date')>=0||h.indexOf('libell')>=0) start=1; }
+      const txs=[], chs=[];
+      for(let i=start;i<lines.length;i++){ const c=parse(lines[i]); if(c.length<5) continue;
+        const date=c[0], label=c[1]||'Import', category=c[2]||'Divers', type=(c[3]||'').toLowerCase(); const amount=parseFloat(String(c[4]).replace(/[^0-9,.-]/g,'').replace(',','.')); if(isNaN(amount)||amount===0) continue;
+        if(type==='charge'||/charge/i.test(date)){ chs.push({id:'c'+Date.now()+i,label,amount:Math.abs(amount),category,day:5}); }
+        else { const d=new Date(date); const iso=isNaN(d)?new Date().toISOString():d.toISOString(); txs.push({id:'t'+Date.now()+i,label,amount:Math.abs(amount),type:type==='revenu'?'revenu':'depense',category,date:iso}); } }
+      this.setState(s=>({transactions:[...txs,...s.transactions],charges:[...s.charges,...chs]}));
+    }catch(err){} };
+    reader.readAsText(file); e.target.value=''; }
+
+  coachReply(text){ const t=(text||'').toLowerCase();
+    const cur=this.monthDate(0); const fixed=this.state.charges.reduce((a,c)=>a+c.amount,0);
+    const mt=this.state.transactions.filter(x=>this.sameMonth(x.date,cur));
+    const spent=mt.filter(x=>x.type==='depense').reduce((a,x)=>a+x.amount,0);
+    const extra=mt.filter(x=>x.type==='revenu').reduce((a,x)=>a+x.amount,0);
+    const rav=this.state.income+extra-fixed-spent;
+    if(t.includes('reste')||t.includes('vivre')) return "Ton reste \u00e0 vivre, c'est ce qu'il te reste une fois tes charges fixes et tes d\u00e9penses d\u00e9duites de tes revenus. Aujourd'hui : "+this.fmt(rav)+". "+(rav>=0?"Tu es dans le vert \ud83d\udcaa":"Budget serr\u00e9, on regarde \u00e7a ensemble, sans stress.");
+    if(t.includes('\u00e9pargn')||t.includes('econom')||t.includes('\u00e9conom')||t.includes('c\u00f4t\u00e9')) return rav>0?("Il te reste "+this.fmt(rav)+" ce mois. Tu pourrais en mettre une partie de c\u00f4t\u00e9 sans te priver. On fixe un petit objectif ?"):("Le budget est un peu juste ce mois-ci. Commen\u00e7ons petit : m\u00eame 5\u20ac mis de c\u00f4t\u00e9, c'est d\u00e9j\u00e0 une victoire.");
+    if(t.includes('d\u00e9pens')||t.includes('depens')||t.includes('analyse')) return spent>0?("Ce mois, tu as d\u00e9pens\u00e9 "+this.fmt(spent)+" (hors charges fixes de "+this.fmt(fixed)+"). Regarde l'onglet D\u00e9penses pour la r\u00e9partition par cat\u00e9gorie."):("Tu n'as pas encore saisi de d\u00e9pense ce mois. D\u00e8s que tu en ajoutes, je t'aide \u00e0 rep\u00e9rer les postes o\u00f9 tu peux souffler.");
+    if(t.includes('bilan')) return "Ce mois : "+this.fmt(this.state.income+extra)+" de revenus, "+this.fmt(fixed+spent)+" de d\u00e9penses, soit un solde de "+this.fmt(rav)+". "+(rav>=0?"Beau travail !":"On va rem\u00e9dier \u00e0 \u00e7a, tranquillement.");
+    if(t.includes('bonjour')||t.includes('salut')||t.includes('coucou')) return "Salut ! Content de te voir. Une d\u00e9pense t'a surpris, ou tout est sous contr\u00f4le ?";
+    if(t.includes('merci')) return "Avec plaisir \ud83d\ude42 Je suis l\u00e0 quand tu veux \u2014 chaque euro not\u00e9, c'est un euro repris en main.";
+    return "Je note. Dis-m'en un peu plus : tu penses \u00e0 une d\u00e9pense pr\u00e9cise, \u00e0 ton reste \u00e0 vivre, ou \u00e0 un objectif d'\u00e9pargne ? On avance \u00e0 ton rythme."; }
+  pushCoach(text){ if(!text||!text.trim()) return; const msg=text.trim();
+    this.setState(s=>({chatMsgs:[...s.chatMsgs,{from:'me',text:msg}],chatInput:'',chatTyping:true}));
+    setTimeout(()=>{ this.setState(s=>({chatMsgs:[...s.chatMsgs,{from:'coach',text:this.coachReply(msg)}],chatTyping:false})); },900); }
+
+  exportCSV(){ try{ const rows=[['Date','Libell\u00e9','Cat\u00e9gorie','Type','Montant']];
+    this.state.transactions.forEach(t=>rows.push([t.date.slice(0,10),t.label,t.category,t.type,String(t.amount).replace('.',',')]));
+    this.state.charges.forEach(c=>rows.push(['(charge fixe)',c.label,c.category,'charge',String(c.amount).replace('.',',')]));
+    const csv=rows.map(r=>r.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(';')).join('\n');
+    const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'}); const url=URL.createObjectURL(blob);
+    const a=document.createElement('a'); a.href=url; a.download='tirely-export.csv'; document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+  }catch(e){} }
+  wipeData(){ if(!confirm('Effacer toutes tes donn\u00e9es Tirely sur cet appareil ? Cette action est irr\u00e9versible.')) return;
+    try{ localStorage.removeItem('tirely_data'); localStorage.removeItem('tirely_onboarded'); }catch(e){}
+    this.setState({name:'',income:0,transactions:[],charges:[],premium:false,screen:'home'}); }
+
+  renderVals(){
+    const s=this.state;
+    const disp=(n)=>s.screen===n?'flex':'none';
+    const navColor=(n)=>s.screen===n?'#4DBEDB':'#6B7A8D';
+    const cur=this.monthDate(0);
+    const fixedTotal=s.charges.reduce((a,c)=>a+c.amount,0);
+    const monthTx=s.transactions.filter(t=>this.sameMonth(t.date,cur));
+    const spent=monthTx.filter(t=>t.type==='depense').reduce((a,t)=>a+t.amount,0);
+    const extraInc=monthTx.filter(t=>t.type==='revenu').reduce((a,t)=>a+t.amount,0);
+    const totalIncome=s.income+extraInc;
+    const rav=totalIncome-fixedTotal-spent;
+    const ravColor= rav<0 ? '#F5A623' : '#4CAF82';
+    const C=2*Math.PI*80;
+    const frac= totalIncome>0 ? Math.min(1,(fixedTotal+spent)/totalIncome) : 0;
+    const ravDash=(frac*C).toFixed(1)+' '+C.toFixed(1);
+
+    // recent
+    const recent=s.transactions.slice(0,5).map(t=>{ const col=this.CATS[t.category]||'#6B7A8D';
+      return {tint:this.tint(col),iconEl:this.iconEl(t.category,col,20),label:t.label,sub:t.category+' \u00b7 '+this.dateLabel(t.date),
+        amtText:this.fmtSigned(t.amount,t.type),amtColor:t.type==='revenu'?'#4CAF82':'#E8695B'}; });
+
+    // viz (this month, charges + depenses)
+    const totals=this.catTotals(cur); const cats=Object.keys(totals).filter(c=>totals[c]>0).sort((a,b)=>totals[b]-totals[a]);
+    const vizTot=cats.reduce((a,c)=>a+totals[c],0); const RC=2*Math.PI*55; let off=0;
+    const donut=cats.map(c=>{ const len=vizTot?totals[c]/vizTot*RC:0; const seg={color:this.CATS[c]||'#6B7A8D',dash:len.toFixed(1)+' '+(RC-len).toFixed(1),offset:(-off).toFixed(1)}; off+=len; return seg; });
+    const legend=cats.slice(0,5).map(c=>({color:this.CATS[c]||'#6B7A8D',name:c,pct:Math.round(totals[c]/vizTot*100)+'%'}));
+    const vizList=cats.map(c=>({tint:this.tint(this.CATS[c]||'#6B7A8D'),iconEl:this.iconEl(c,this.CATS[c]||'#6B7A8D',18),name:c,amtText:this.fmt(totals[c])}));
+
+    // charges
+    const chargesList=s.charges.map(c=>{ const col=this.CATS[c.category]||'#6B7A8D';
+      return {tint:this.tint(col),iconEl:this.iconEl(c.category,col,22),label:c.label,
+        sub: c.day?('Pr\u00e9l\u00e8vement le '+c.day+' de chaque mois'):('Charge mensuelle \u00b7 '+c.category),
+        amtText:'- '+this.fmt(c.amount).replace('- ',''), edit:()=>this.openChargeEdit(c), remove:()=>this.deleteChargeById(c.id)}; });
+
+    // bilan (selected month)
+    const bm=this.monthDate(s.month);
+    const bmTx=s.transactions.filter(t=>this.sameMonth(t.date,bm));
+    const bSpent=bmTx.filter(t=>t.type==='depense').reduce((a,t)=>a+t.amount,0);
+    const bExtra=bmTx.filter(t=>t.type==='revenu').reduce((a,t)=>a+t.amount,0);
+    const bIncome=s.income+bExtra; const bExpense=fixedTotal+bSpent; const bSolde=bIncome-bExpense;
+    const bt=this.catTotals(bm); const bcats=Object.keys(bt).filter(c=>bt[c]>0).sort((a,b)=>bt[b]-bt[a]);
+    const bilanDetail=bcats.map(c=>{ const col=this.CATS[c]||'#6B7A8D'; const cnt=s.transactions.filter(x=>x.type==='depense'&&x.category===c&&this.sameMonth(x.date,bm)).length + s.charges.filter(x=>x.category===c).length;
+      return {tint:this.tint(col),iconEl:this.iconEl(c,col,20),name:c,count:cnt+' '+(cnt>1?'\u00e9l\u00e9ments':'\u00e9l\u00e9ment'),amtText:this.fmt(bt[c])}; });
+    const barVals=[]; for(let i=5;i>=0;i--){ const d=this.monthDate(i); const dep=s.transactions.filter(t=>t.type==='depense'&&this.sameMonth(t.date,d)).reduce((a,t)=>a+t.amount,0)+fixedTotal; barVals.push({d,val:dep}); }
+    const maxBar=Math.max.apply(null,barVals.map(b=>b.val).concat([1]));
+    const bars=barVals.map(b=>({label:this.monthShort(b.d),h:Math.round(b.val/maxBar*100)+'%',color:this.sameMonth(b.d.toISOString(),bm)?'#4DBEDB':'#D4E4F0'}));
+
+    // bilan annuel
+    const nowY=new Date().getFullYear();
+    const selYear=nowY - s.yearOff;
+    const lastM=(selYear===nowY)? new Date().getMonth() : 11;
+    const monthsN=lastM+1;
+    const yTx=s.transactions.filter(t=>this.sameYear(t.date,selYear));
+    const yExtra=yTx.filter(t=>t.type==='revenu').reduce((a,t)=>a+t.amount,0);
+    const ySpent=yTx.filter(t=>t.type==='depense').reduce((a,t)=>a+t.amount,0);
+    const yIncome=s.income*monthsN + yExtra;
+    const yExpense=fixedTotal*monthsN + ySpent;
+    const ySolde=yIncome-yExpense;
+    const yAvg=Math.round(ySolde/monthsN);
+    const MM=['J','F','M','A','M','J','J','A','S','O','N','D'];
+    const yBarVals=[]; for(let m=0;m<12;m++){ const active=(selYear<nowY)||(m<=lastM);
+      const dep=active ? (s.transactions.filter(t=>t.type==='depense'&&new Date(t.date).getFullYear()===selYear&&new Date(t.date).getMonth()===m).reduce((a,t)=>a+t.amount,0)+fixedTotal) : 0;
+      yBarVals.push({m,dep,active}); }
+    const yMax=Math.max.apply(null,yBarVals.map(b=>b.dep).concat([1]));
+    const yBars=yBarVals.map(b=>({label:MM[b.m],h:Math.round(b.dep/yMax*100)+'%',color:b.active?(b.dep>0?'#4DBEDB':'#D4E4F0'):'#EEF3FA'}));
+    const yt={}; s.charges.forEach(c=>{ yt[c.category]=(yt[c.category]||0)+c.amount*monthsN; });
+    yTx.filter(x=>x.type==='depense').forEach(x=>{ yt[x.category]=(yt[x.category]||0)+x.amount; });
+    const ycats=Object.keys(yt).filter(c=>yt[c]>0).sort((a,b)=>yt[b]-yt[a]);
+    const yearDetail=ycats.map(c=>{ const col=this.CATS[c]||'#6B7A8D'; return {tint:this.tint(col),iconEl:this.iconEl(c,col,20),name:c,count:'sur '+monthsN+' mois',amtText:this.fmt(yt[c])}; });
+    const bTab=s.bilanTab||'mois';
+    const tabBase='flex:1;height:36px;border-radius:10px;border:none;font-size:13.5px;font-weight:700;cursor:pointer;font-family:inherit;transition:all 0.15s;';
+    const tabOn=tabBase+'background:#fff;color:#2E6DA4;box-shadow:0 2px 6px rgba(30,58,95,0.12);';
+    const tabOff=tabBase+'background:transparent;color:#6B7A8D;';
+
+    // currency chips
+    const curObj=this.CURRENCIES.find(c=>c.code===s.currency)||this.CURRENCIES[0];
+    const currencyOptions=this.CURRENCIES.map(c=>({code:c.code,label:c.sym+'  ·  '+c.name}));
+    // toggles
+    const mkT=(key,label,desc)=>{ const on=s.notif[key];
+      return {label,desc,toggle:()=>this.setState(st=>({notif:{...st.notif,[key]:!st.notif[key]}})),
+        trackStyle:'width:46px;height:27px;border-radius:14px;position:relative;cursor:pointer;flex-shrink:0;transition:background 0.2s;background:'+(on?'#4CAF82':'#D4E4F0')+';',
+        knobStyle:'width:21px;height:21px;border-radius:50%;background:#fff;position:absolute;top:3px;transition:left 0.2s;box-shadow:0 1px 3px rgba(0,0,0,0.2);left:'+(on?'22px':'3px')+';'}; };
+    const toggles=[ mkT('oubli','Abonnement oubli\u00e9','Alerte douce si un paiement dort'), mkT('seuil','Reste \u00e0 vivre bas','Pr\u00e9venir quand il passe sous 50\u20ac'), mkT('resume','R\u00e9sum\u00e9 hebdo','Chaque lundi matin, en douceur') ];
+    // tx / charge category chips
+    const catNames=['Alimentation','Transport','Logement','Loisirs','Sant\u00e9','Abonnements','V\u00eatements','Divers'];
+    const txCats=catNames.map(c=>({label:c,select:()=>this.setState({txCat:c}),style:this.pill(s.txCat===c)}));
+    const chargeCats=catNames.map(c=>({label:c,select:()=>this.setState({chargeCat:c}),style:this.pill(s.chargeCat===c)}));
+
+    const chatMsgs=s.chatMsgs.map(m=>{ const mine=m.from==='me';
+      return {text:m.text, rowStyle:'display:flex;justify-content:'+(mine?'flex-end':'flex-start')+';',
+        bubbleStyle: mine? 'max-width:80%;padding:12px 15px;border-radius:16px 16px 4px 16px;background:#1E3A5F;color:#fff;font-size:13.5px;line-height:1.5;'
+                         : 'max-width:80%;padding:12px 15px;border-radius:4px 16px 16px 16px;background:#E7F3F7;color:#1E3A5F;font-size:13.5px;line-height:1.5;'}; });
+    const chips=[{label:'Analyse mes d\u00e9penses'},{label:'C\'est quoi le reste \u00e0 vivre ?'},{label:'Comment \u00e9pargner ?'}].map(c=>({label:c.label,send:()=>this.pushCoach(c.label)}));
+
+    const name = s.name || '';
+    const nameOrGuest = s.name || 'Invit\u00e9';
+
+    return {
+      homeDisp:disp('home'), vizDisp:disp('viz'), chargesDisp:disp('charges'), bilanDisp:disp('bilan'), assistantDisp:disp('assistant'), profileDisp:disp('profile'),
+      navDisp: (s.screen==='assistant'||s.screen==='profile') ? 'none':'flex',
+      navHome:navColor('home'), navViz:navColor('viz'), navCharges:navColor('charges'), navBilan:navColor('bilan'),
+      goHome:()=>this.go('home'), goViz:()=>this.go('viz'), goCharges:()=>this.go('charges'), goBilan:()=>this.go('bilan'), goAssistant:()=>this.go('assistant'), goProfile:()=>this.go('profile'),
+
+      name: name || 'Bienvenue', nameOrGuest, initial:(s.name||'T').charAt(0).toUpperCase(),
+      ravText:this.fmt(rav), ravColor, ravDash,
+      budgetLine: totalIncome>0 ? (this.fmt(totalIncome)+' de revenus \u00b7 '+this.fmt(fixedTotal+spent)+' d\u00e9pens\u00e9s') : 'Configure ton budget pour commencer',
+      miniIncome:'+ '+this.fmt(totalIncome).replace('- ',''), miniSpent:'- '+this.fmt(fixedTotal+spent).replace('- ',''), miniCharges:this.fmt(fixedTotal),
+      recent, noTx: s.transactions.length===0,
+
+      hasViz: vizTot>0, noViz: vizTot===0, donut, legend, vizList, vizTotal:this.fmt(vizTot),
+
+      chargesTotal:'- '+this.fmt(fixedTotal).replace('- ',''), chargesCount:String(s.charges.length), chargesList, noCharges:s.charges.length===0, openChargeAdd:()=>this.openChargeAdd(),
+
+      prevMonth:()=>this.setState({month:Math.min(5,s.month+1)}), nextMonth:()=>this.setState({month:Math.max(0,s.month-1)}),
+      monthLabel:this.monthName(bm), bilanIncome:'+ '+this.fmt(bIncome).replace('- ',''), bilanExpense:'- '+this.fmt(bExpense).replace('- ',''),
+      bilanSolde:(bSolde>=0?'+ ':'- ')+this.fmt(bSolde).replace('- ',''), bilanSoldeColor: bSolde<0?'#F5A623':'#2E6DA4',
+      bars, bilanDetail, noBilan: bcats.length===0, openTxBilan:()=>this.openTxBilan(),
+      bilanIsMonth: bTab!=='annee', bilanIsYear: bTab==='annee',
+      setBilanMois:()=>this.setState({bilanTab:'mois'}), setBilanAnnee:()=>this.setState({bilanTab:'annee'}),
+      tabMoisStyle: bTab!=='annee'?tabOn:tabOff, tabAnneeStyle: bTab==='annee'?tabOn:tabOff,
+      prevYear:()=>this.setState({yearOff:Math.min(10,s.yearOff+1)}), nextYear:()=>this.setState({yearOff:Math.max(0,s.yearOff-1)}),
+      yearLabel:String(selYear),
+      yearIncome:'+ '+this.fmt(yIncome).replace('- ',''), yearExpense:'- '+this.fmt(yExpense).replace('- ',''),
+      yearSolde:(ySolde>=0?'+ ':'- ')+this.fmt(ySolde).replace('- ',''), yearSoldeColor: ySolde<0?'#F5A623':'#2E6DA4',
+      yearAvgMonth:(yAvg>=0?'+ ':'- ')+this.fmt(yAvg).replace('- ',''),
+      yBars, yearDetail, noYear: ycats.length===0,
+
+      coachGreeting: (s.name?('Salut '+s.name+' ! '):'Salut ! ')+"Je suis ton Sparring Partner. Pas l\u00e0 pour te juger \u2014 juste pour t'aider \u00e0 y voir clair. Comment vas-tu, ton budget ?",
+      chips, chatMsgs, chatTyping:s.chatTyping, chatInput:s.chatInput,
+      onChatInput:(e)=>this.setState({chatInput:e.target.value}), onChatKey:(e)=>{ if(e.key==='Enter') this.pushCoach(s.chatInput); },
+      sendChat:()=>this.pushCoach(s.chatInput),
+
+      premiumBadge: s.premium?'Actif':'Gratuit', premiumCta: s.premium?'G\u00e9rer mon abonnement':'Essayer 14 jours gratuits', togglePremium:()=>this.setState({premium:!s.premium}),
+      currency:s.currency, currencyOptions, curSymDisplay:curObj.sym, onCurrency:(e)=>this.setState({currency:e.target.value}), name2:s.name, onName:(e)=>this.setState({name:e.target.value}), toggles, exportCSV:()=>this.exportCSV(), wipeData:()=>this.wipeData(), triggerImport:()=>this.triggerImport(), onImport:(e)=>this.onImport(e),
+
+      txModalDisp:s.txModal?'flex':'none', closeTx:()=>this.setState({txModal:false}), openTx:()=>this.openTxAdd(), saveTx:()=>this.saveTx(),
+      setDepense:()=>this.setState({txType:'depense'}), setRevenu:()=>this.setState({txType:'revenu'}),
+      typeDepenseStyle:this.pill(s.txType==='depense'), typeRevenuStyle:this.pill(s.txType==='revenu'), txCats,
+
+      chargeModalDisp:s.chargeModal?'flex':'none', closeCharge:()=>this.setState({chargeModal:false}), saveCharge:()=>this.saveCharge(),
+      chargeTitle: s.editChargeId?'Modifier la charge':'Ajouter une charge', chargeCats, chargeCanDelete:!!s.editChargeId, deleteCharge:()=>this.deleteCharge()
+    };
+  }
+}
+</script>
+</body>
+</html>
